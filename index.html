@@ -1,1 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="tonamson - full-stack developer shipping AI utilities, wallet tools, and small products you can clone and run." />
+  <meta property="og:title" content="tonamson - Developer Profile" />
+  <meta property="og:description" content="Practical tools: AI utilities, wallet scanners, and open-source experiments." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://tonamson.github.io/" />
+  <meta property="og:image" content="https://avatars.githubusercontent.com/u/9658005?v=4" />
+  <meta name="theme-color" content="#0a0a0b" />
+  <title>tonamson - Developer Profile</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a0a0b'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='monospace' font-size='14' fill='%235b8def'%3Et%3C/text%3E%3C/svg%3E" />
+  <!-- Design: Outfit + JetBrains Mono via Bunny Fonts (self-host alternative later) -->
+  <link rel="preconnect" href="https://fonts.bunny.net" />
+  <link href="https://fonts.bunny.net/css?family=jetbrains-mono:400,500|outfit:400,500,600" rel="stylesheet" />
+  <style>
+    /* Design Read: developer portfolio, premium kinetic-technical, dark-first craft.
+       Dials: VARIANCE 7 · MOTION 7 · DENSITY 3 */
 
+    :root {
+      --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+      --font-mono: "JetBrains Mono", ui-monospace, monospace;
+      --surface: #f4f4f5;
+      --elevated: #ffffff;
+      --ink: #18181b;
+      --muted: #52525b;
+      --line: #e4e4e7;
+      --accent: #3d6fd8;
+      --accent-soft: #e8effc;
+      --radius: 14px;
+      --radius-sm: 12px;
+      --max: 1400px;
+      --shadow: 0 20px 50px -28px color-mix(in oklab, var(--accent) 45%, transparent);
+    }
+
+    html.dark {
+      --surface: #0a0a0b;
+      --elevated: #121214;
+      --ink: #f4f4f5;
+      --muted: #a1a1aa;
+      --line: #27272a;
+      --accent: #5b8def;
+      --accent-soft: #152238;
+      color-scheme: dark;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .marquee-track { animation: none !important; }
+      .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+      .hero-stagger > * { opacity: 1 !important; transform: none !important; animation: none !important; }
+    }
+
+    body {
+      margin: 0;
+      min-height: 100dvh;
+      font-family: var(--font-sans);
+      background: var(--surface);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    ::selection {
+      background: color-mix(in oklab, var(--accent) 35%, transparent);
+      color: var(--ink);
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    ul { list-style: none; margin: 0; padding: 0; }
+    button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+
+    .grain {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      opacity: 0.04;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    html.dark .grain { opacity: 0.055; }
+
+    .wrap {
+      width: min(100% - 2rem, var(--max));
+      margin-inline: auto;
+    }
+    @media (min-width: 768px) {
+      .wrap { width: min(100% - 3rem, var(--max)); }
+    }
+
+    /* NAV */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      height: 64px;
+      border-bottom: 1px solid color-mix(in oklab, var(--line) 80%, transparent);
+      background: color-mix(in oklab, var(--surface) 82%, transparent);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .nav-inner {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .wordmark {
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+    .nav-links {
+      display: none;
+      gap: 1.75rem;
+    }
+    @media (min-width: 768px) {
+      .nav-links { display: flex; }
+    }
+    .nav-links a {
+      font-size: 0.875rem;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-actions { display: flex; align-items: center; gap: 0.5rem; }
+    .icon-btn {
+      width: 36px;
+      height: 36px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: var(--elevated);
+      transition: transform 0.15s;
+    }
+    .icon-btn:active { transform: scale(0.98); }
+    .icon-btn svg { width: 18px; height: 18px; }
+
+    /* HERO */
+    .hero {
+      min-height: 100dvh;
+      display: grid;
+      align-items: center;
+      gap: 2.5rem;
+      padding: 4rem 0 4rem;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 900px) {
+      .hero {
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 2rem;
+        padding-top: 5rem;
+      }
+    }
+    .eyebrow {
+      margin: 0 0 1.25rem;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .hero h1 {
+      margin: 0;
+      max-width: 14ch;
+      font-size: clamp(2.25rem, 5vw, 3.75rem);
+      font-weight: 500;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+      padding-bottom: 0.15em;
+    }
+    .hero-sub {
+      margin: 1.25rem 0 0;
+      max-width: 36ch;
+      font-size: clamp(1rem, 2vw, 1.125rem);
+      line-height: 1.6;
+      color: var(--muted);
+    }
+    .cta-row {
+      margin-top: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: transform 0.15s, background 0.2s, border-color 0.2s;
+      white-space: nowrap;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-secondary {
+      border: 1px solid var(--line);
+      background: var(--elevated);
+      color: var(--ink);
+    }
+    .btn svg { width: 16px; height: 16px; }
+
+    .hero-visual {
+      position: relative;
+      max-width: 28rem;
+      margin-inline: auto;
+      width: 100%;
+    }
+    @media (min-width: 900px) {
+      .hero-visual { margin-left: auto; max-width: none; }
+    }
+    .portrait {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: var(--elevated);
+    }
+    .portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .portrait::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, color-mix(in oklab, var(--surface) 70%, transparent), transparent 45%);
+      pointer-events: none;
+    }
+    .portrait-meta {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      z-index: 1;
+      padding: 1.25rem;
+    }
+    .portrait-meta .name {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+    .portrait-meta .role {
+      margin-top: 0.25rem;
+      max-width: 28ch;
+      font-size: 0.875rem;
+      line-height: 1.35;
+    }
+    .portrait-frame {
+      display: none;
+      position: absolute;
+      inset: auto -0.75rem -0.75rem auto;
+      width: 100%;
+      height: 100%;
+      border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent);
+      border-radius: var(--radius);
+      z-index: -1;
+      pointer-events: none;
+    }
+    @media (min-width: 900px) {
+      .portrait-frame { display: block; }
+    }
+
+    /* Stagger hero */
+    .hero-stagger > * {
+      opacity: 0;
+      transform: translateY(22px);
+      animation: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .hero-stagger > *:nth-child(1) { animation-delay: 0.06s; }
+    .hero-stagger > *:nth-child(2) { animation-delay: 0.14s; }
+    .hero-stagger > *:nth-child(3) { animation-delay: 0.22s; }
+    .hero-stagger > *:nth-child(4) { animation-delay: 0.3s; }
+    .hero-visual {
+      opacity: 0;
+      transform: scale(1.04);
+      animation: fadeScale 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.12s forwards;
+    }
+    @keyframes rise {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeScale {
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* SECTIONS */
+    section { padding: 6rem 0; }
+    @media (min-width: 768px) {
+      section { padding: 8rem 0; }
+    }
+    .section-head {
+      max-width: 36rem;
+      margin-bottom: 3rem;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(1.75rem, 3vw, 2.25rem);
+      font-weight: 500;
+      letter-spacing: -0.03em;
+    }
+    .section-head p {
+      margin: 0.75rem 0 0;
+      max-width: 55ch;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.is-in { opacity: 1; transform: none; }
+
+    /* WORK table list */
+    .work-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem 1.25rem;
+      margin-bottom: 1.25rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+    .work-meta a {
+      color: var(--accent);
+    }
+    .work-meta a:hover { text-decoration: underline; }
+
+    .repo-table-wrap {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--elevated);
+      overflow: hidden;
+    }
+    .repo-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    .repo-table thead {
+      display: none;
+    }
+    @media (min-width: 768px) {
+      .repo-table thead { display: table-header-group; }
+    }
+    .repo-table th {
+      padding: 0.85rem 1.15rem;
+      text-align: left;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 1px solid var(--line);
+      background: color-mix(in oklab, var(--surface) 70%, var(--elevated));
+    }
+    .repo-table th.col-stars,
+    .repo-table td.col-stars {
+      text-align: right;
+      white-space: nowrap;
+      width: 5.5rem;
+    }
+    .repo-table th.col-lang,
+    .repo-table td.col-lang {
+      white-space: nowrap;
+      width: 8rem;
+    }
+    .repo-table th.col-link,
+    .repo-table td.col-link {
+      width: 3rem;
+      text-align: center;
+    }
+    .repo-table tbody tr {
+      border-bottom: 1px solid var(--line);
+      transition: background 0.15s;
+    }
+    .repo-table tbody tr:last-child { border-bottom: none; }
+    .repo-table tbody tr:hover {
+      background: color-mix(in oklab, var(--accent-soft) 55%, transparent);
+    }
+    .repo-table td {
+      padding: 1rem 1.15rem;
+      vertical-align: top;
+    }
+    .repo-name {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-mono);
+      font-weight: 500;
+      color: var(--ink);
+    }
+    .repo-name:hover { color: var(--accent); }
+    .repo-desc {
+      margin: 0.35rem 0 0;
+      max-width: 48ch;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+    @media (min-width: 768px) {
+      .repo-desc { margin: 0; }
+    }
+    .lang-pill {
+      display: inline-block;
+      padding: 0.15rem 0.55rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted);
+      background: var(--surface);
+    }
+    .star-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.35rem;
+      font-family: var(--font-mono);
+      font-variant-numeric: tabular-nums;
+      font-size: 0.875rem;
+      color: var(--ink);
+    }
+    .star-count svg {
+      width: 14px;
+      height: 14px;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    .row-link {
+      display: inline-flex;
+      color: var(--muted);
+      transition: color 0.15s, transform 0.15s;
+    }
+    .row-link:hover {
+      color: var(--accent);
+      transform: translate(1px, -1px);
+    }
+    .row-link svg { width: 16px; height: 16px; }
+
+    /* Mobile: card-like rows */
+    @media (max-width: 767px) {
+      .repo-table,
+      .repo-table tbody,
+      .repo-table tr,
+      .repo-table td {
+        display: block;
+        width: 100%;
+      }
+      .repo-table tr {
+        padding: 1rem 1.1rem 1.1rem;
+        position: relative;
+      }
+      .repo-table td {
+        padding: 0;
+        border: none;
+      }
+      .repo-table td.col-name { padding-right: 2rem; }
+      .repo-table td.col-desc { margin-top: 0.35rem; }
+      .repo-table td.col-lang { margin-top: 0.75rem; display: inline-block; width: auto; }
+      .repo-table td.col-stars {
+        display: inline-flex;
+        width: auto;
+        margin-top: 0.75rem;
+        margin-left: 0.75rem;
+        text-align: left;
+      }
+      .repo-table td.col-link {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        width: auto;
+      }
+    }
+
+    .repo-status {
+      padding: 2.5rem 1.25rem;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .repo-status.is-error { color: color-mix(in oklab, #c45c5c 80%, var(--ink)); }
+    .repo-skeleton tr td {
+      color: transparent;
+      user-select: none;
+    }
+    .repo-skeleton .sk {
+      display: inline-block;
+      height: 0.85rem;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--line), color-mix(in oklab, var(--line) 40%, var(--elevated)), var(--line));
+      background-size: 200% 100%;
+      animation: shimmer 1.2s ease-in-out infinite;
+    }
+    @keyframes shimmer {
+      0% { background-position: 100% 0; }
+      100% { background-position: -100% 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .repo-skeleton .sk { animation: none; }
+    }
+
+    /* STACK */
+    #stack {
+      border-block: 1px solid var(--line);
+      background: var(--elevated);
+    }
+    .stack-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+    @media (min-width: 640px) {
+      .stack-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (min-width: 1024px) {
+      .stack-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .stack-cell {
+      padding: 1.5rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+    .stack-cell:first-child {
+      background: var(--accent-soft);
+    }
+    @media (min-width: 1024px) {
+      .stack-cell:first-child { grid-row: span 2; }
+      .stack-cell:nth-child(2) { grid-column: span 2; }
+    }
+    .stack-cell h3 {
+      margin: 0;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 400;
+    }
+    .stack-tags {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    @media (min-width: 1024px) {
+      .stack-cell:first-child .stack-tags {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+      }
+    }
+    .stack-tags span {
+      padding: 0.35rem 0.75rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--elevated);
+      font-size: 0.875rem;
+    }
+
+    .marquee {
+      margin-top: 4rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--line);
+      overflow: hidden;
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      gap: 2.5rem;
+      white-space: nowrap;
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      color: var(--muted);
+      animation: marquee 42s linear infinite;
+    }
+    .marquee-track span { display: inline-flex; align-items: center; gap: 2.5rem; }
+    .marquee-track i {
+      font-style: normal;
+      color: var(--accent);
+    }
+    @keyframes marquee {
+      to { transform: translateX(-50%); }
+    }
+
+    /* CONTACT */
+    #contact { padding-bottom: 2rem; }
+    .contact-band {
+      position: relative;
+      overflow: hidden;
+      padding: 4rem 1.5rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--elevated);
+    }
+    @media (min-width: 768px) {
+      .contact-band { padding: 6rem 3rem; }
+    }
+    .contact-band::before,
+    .contact-band::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(64px);
+      pointer-events: none;
+    }
+    .contact-band::before {
+      width: 18rem; height: 18rem;
+      top: -5rem; right: -5rem;
+      background: color-mix(in oklab, var(--accent) 15%, transparent);
+    }
+    .contact-band::after {
+      width: 16rem; height: 16rem;
+      bottom: -6rem; left: -4rem;
+      background: color-mix(in oklab, var(--accent) 10%, transparent);
+    }
+    .contact-band h2 {
+      position: relative;
+      margin: 0;
+      max-width: 12ch;
+      font-size: clamp(2.25rem, 6vw, 4.5rem);
+      font-weight: 500;
+      letter-spacing: -0.04em;
+      line-height: 1.02;
+    }
+    .contact-band > p {
+      position: relative;
+      margin: 1.25rem 0 0;
+      max-width: 40ch;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 1.05rem;
+    }
+    .contact-band .cta-row { position: relative; }
+
+    /* FOOTER */
+    footer {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      padding: 2.5rem 0;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+    @media (min-width: 640px) {
+      footer {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+    footer a:hover { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="wordmark" href="#top">tonamson</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#work">Work</a>
+        <a href="#stack">Stack</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="icon-btn" href="https://github.com/tonamson" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.167 6.839 9.49.5.09.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.157-1.11-1.465-1.11-1.465-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12c0-5.523-4.477-10-10-10z"/></svg>
+        </a>
+        <button class="icon-btn" type="button" id="theme-toggle" aria-label="Toggle color theme">
+          <svg id="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg id="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" hidden aria-hidden="true"><path d="M21 14.5A8.5 8.5 0 1 1 9.5 3a7 7 0 0 0 11.5 11.5z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="wrap hero" id="top">
+      <div class="hero-stagger">
+        <p class="eyebrow">Building in public</p>
+        <h1>Tools you can <em>clone</em> and run</h1>
+        <p class="hero-sub">I ship practical tools: AI utilities, wallet scanners, and small products people can clone and run.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary magnetic" href="#work">
+            View work
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn btn-secondary" href="https://github.com/tonamson" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.167 6.839 9.49.5.09.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.157-1.11-1.465-1.11-1.465-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12c0-5.523-4.477-10-10-10z"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="portrait">
+          <img
+            src="https://avatars.githubusercontent.com/u/9658005?v=4"
+            alt="tonamson avatar"
+            width="640"
+            height="800"
+            fetchpriority="high"
+          />
+          <div class="portrait-meta">
+            <div class="name">tonamson</div>
+            <div class="role">Full-stack / systems-minded developer building tools around AI, wallets, and developer productivity</div>
+          </div>
+        </div>
+        <div class="portrait-frame" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- WORK: live table from GitHub public API -->
+    <section id="work">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Selected work</h2>
+          <p>Public repos loaded from GitHub. Stars update live on each page load.</p>
+        </div>
+
+        <div class="work-meta reveal">
+          <span id="repo-sync">Loading repos…</span>
+          <a href="https://github.com/tonamson?tab=repositories" target="_blank" rel="noopener noreferrer">View all on GitHub</a>
+        </div>
+
+        <div class="repo-table-wrap reveal" style="transition-delay:0.06s">
+          <table class="repo-table" id="repo-table" aria-label="Public GitHub repositories">
+            <thead>
+              <tr>
+                <th scope="col">Repository</th>
+                <th scope="col" class="col-desc-head">Description</th>
+                <th scope="col" class="col-lang">Language</th>
+                <th scope="col" class="col-stars">Stars</th>
+                <th scope="col" class="col-link"><span class="visually-hidden">Link</span></th>
+              </tr>
+            </thead>
+            <tbody id="repo-tbody" class="repo-skeleton">
+              <tr>
+                <td colspan="5">
+                  <div class="repo-status"><span class="sk" style="width:12rem"></span></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- STACK -->
+    <section id="stack">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Stack</h2>
+          <p>Languages and surfaces I use to ship small, focused tools.</p>
+        </div>
+        <div class="stack-grid">
+          <div class="stack-cell reveal">
+            <h3>Languages</h3>
+            <div class="stack-tags">
+              <span>TypeScript</span><span>JavaScript</span><span>Solidity</span>
+            </div>
+          </div>
+          <div class="stack-cell reveal" style="transition-delay:0.05s">
+            <h3>Runtime &amp; Web</h3>
+            <div class="stack-tags">
+              <span>Node.js</span><span>Browser extensions</span><span>REST APIs</span>
+            </div>
+          </div>
+          <div class="stack-cell reveal" style="transition-delay:0.05s">
+            <h3>On-chain / wallets</h3>
+            <div class="stack-tags">
+              <span>EVM scanners</span><span>Wallet balances</span>
+            </div>
+          </div>
+          <div class="stack-cell reveal" style="transition-delay:0.1s">
+            <h3>Tooling</h3>
+            <div class="stack-tags">
+              <span>Git</span><span>CLI utilities</span><span>Automation</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track" id="marquee-track">
+          <!-- filled by JS for seamless loop -->
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="wrap">
+        <div class="contact-band reveal">
+          <h2>Build something next.</h2>
+          <p>Building in public. Find the code, open an issue, or start a conversation on GitHub.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary magnetic" href="https://github.com/tonamson" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.167 6.839 9.49.5.09.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.157-1.11-1.465-1.11-1.465-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12c0-5.523-4.477-10-10-10z"/></svg>
+              Open GitHub
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <p>tonamson · © <span id="year"></span></p>
+  </footer>
+
+  <script>
+    (function () {
+      // --- Theme (dark-first, toggle + system + localStorage) ---
+      var root = document.documentElement;
+      var toggle = document.getElementById("theme-toggle");
+      var iconSun = document.getElementById("icon-sun");
+      var iconMoon = document.getElementById("icon-moon");
+      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      function systemTheme() {
+        return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+
+      function applyTheme(theme) {
+        root.classList.toggle("dark", theme === "dark");
+        root.style.colorScheme = theme;
+        if (iconSun && iconMoon) {
+          iconSun.hidden = theme !== "dark";
+          iconMoon.hidden = theme === "dark";
+        }
+      }
+
+      var stored = localStorage.getItem("theme");
+      applyTheme(stored || systemTheme() || "dark");
+      if (!stored && !window.matchMedia("(prefers-color-scheme: light)").matches) {
+        applyTheme("dark");
+      }
+
+      toggle && toggle.addEventListener("click", function () {
+        var next = root.classList.contains("dark") ? "light" : "dark";
+        localStorage.setItem("theme", next);
+        applyTheme(next);
+      });
+
+      // --- Year ---
+      var yearEl = document.getElementById("year");
+      if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+      // --- Marquee content (one strip, duplicated for loop) ---
+      var items = [
+        "TypeScript", "JavaScript", "Solidity", "Node.js",
+        "Browser extensions", "EVM scanners", "Git", "CLI"
+      ];
+      var track = document.getElementById("marquee-track");
+      if (track) {
+        var html = items.concat(items).map(function (t) {
+          return '<span>' + t + '<i>/</i></span>';
+        }).join("");
+        track.innerHTML = html;
+      }
+
+      // --- Scroll reveal ---
+      var reveals = document.querySelectorAll(".reveal");
+      if (reduce) {
+        reveals.forEach(function (el) { el.classList.add("is-in"); });
+      } else if ("IntersectionObserver" in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-in");
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.2, rootMargin: "0px 0px -8% 0px" });
+        reveals.forEach(function (el) { io.observe(el); });
+      } else {
+        reveals.forEach(function (el) { el.classList.add("is-in"); });
+      }
+
+      // --- Magnetic buttons (transform only; skip if reduced motion) ---
+      if (!reduce) {
+        document.querySelectorAll(".magnetic").forEach(function (btn) {
+          var raf = 0, tx = 0, ty = 0, cx = 0, cy = 0;
+
+          function tick() {
+            cx += (tx - cx) * 0.18;
+            cy += (ty - cy) * 0.18;
+            btn.style.transform = "translate(" + cx.toFixed(2) + "px," + cy.toFixed(2) + "px)";
+            if (Math.abs(tx - cx) > 0.1 || Math.abs(ty - cy) > 0.1) {
+              raf = requestAnimationFrame(tick);
+            } else {
+              raf = 0;
+            }
+          }
+
+          btn.addEventListener("pointermove", function (e) {
+            var rect = btn.getBoundingClientRect();
+            tx = (e.clientX - (rect.left + rect.width / 2)) * 0.28;
+            ty = (e.clientY - (rect.top + rect.height / 2)) * 0.28;
+            if (!raf) raf = requestAnimationFrame(tick);
+          });
+          btn.addEventListener("pointerleave", function () {
+            tx = 0; ty = 0;
+            if (!raf) raf = requestAnimationFrame(tick);
+          });
+        });
+      }
+
+      // --- Live public repos + star counts (GitHub API) ---
+      var GH_USER = "tonamson";
+      var SKIP_REPOS = {
+        "tonamson.github.io": true,
+        "sui-blockchain": true,
+        "language-noob": true
+      };
+      // Optional polished blurbs; API description used when missing
+      var BLURBS = {
+        "switch-acc-ai": "AI-assisted workflow for switching accounts with less friction.",
+        "translate-ai-extension": "Browser extension for AI-powered translation in context.",
+        "scan-wallet-evm": "Scan EVM wallets and surface balances for inspection.",
+        "scan-wallet-balance": "Scan and report wallet balances across targets.",
+        "wimt": "Track AI token usage."
+      };
+
+      var tbody = document.getElementById("repo-tbody");
+      var syncEl = document.getElementById("repo-sync");
+
+      function escapeHtml(s) {
+        return String(s)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      function formatStars(n) {
+        if (n >= 1000) {
+          var k = n / 1000;
+          return (k >= 10 ? Math.round(k) : Math.round(k * 10) / 10) + "k";
+        }
+        return String(n);
+      }
+
+      function starIcon() {
+        return '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 5.88 6.5.94-4.7 4.58 1.11 6.47L12 17.77l-5.81 3.06 1.11-6.47-4.7-4.58 6.5-.94L12 2.5z"/></svg>';
+      }
+
+      function externalIcon() {
+        return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>';
+      }
+
+      function renderRepos(repos) {
+        if (!tbody) return;
+        tbody.classList.remove("repo-skeleton");
+
+        if (!repos.length) {
+          tbody.innerHTML =
+            '<tr><td colspan="5"><div class="repo-status">No public repositories found.</div></td></tr>';
+          if (syncEl) syncEl.textContent = "0 public repos";
+          return;
+        }
+
+        tbody.innerHTML = repos.map(function (r) {
+          var name = r.name;
+          var desc = BLURBS[name] || r.description || "No description";
+          var lang = r.language || "-";
+          var stars = typeof r.stargazers_count === "number" ? r.stargazers_count : 0;
+          var href = r.html_url;
+
+          return (
+            '<tr>' +
+              '<td class="col-name">' +
+                '<a class="repo-name" href="' + escapeHtml(href) + '" target="_blank" rel="noopener noreferrer">' +
+                  escapeHtml(name) +
+                "</a>" +
+              "</td>" +
+              '<td class="col-desc"><p class="repo-desc">' + escapeHtml(desc) + "</p></td>" +
+              '<td class="col-lang"><span class="lang-pill">' + escapeHtml(lang) + "</span></td>" +
+              '<td class="col-stars">' +
+                '<span class="star-count" title="' + stars + ' stars on GitHub">' +
+                  starIcon() +
+                  '<span data-stars="' + escapeHtml(name) + '">' + formatStars(stars) + "</span>" +
+                "</span>" +
+              "</td>" +
+              '<td class="col-link">' +
+                '<a class="row-link" href="' + escapeHtml(href) + '" target="_blank" rel="noopener noreferrer" aria-label="Open ' + escapeHtml(name) + ' on GitHub">' +
+                  externalIcon() +
+                "</a>" +
+              "</td>" +
+            "</tr>"
+          );
+        }).join("");
+
+        if (syncEl) {
+          var totalStars = repos.reduce(function (s, r) { return s + (r.stargazers_count || 0); }, 0);
+          var now = new Date();
+          var time = now.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" });
+          syncEl.textContent =
+            repos.length + " public · " + totalStars + " stars total · synced " + time;
+        }
+      }
+
+      function renderError(msg) {
+        if (!tbody) return;
+        tbody.classList.remove("repo-skeleton");
+        tbody.innerHTML =
+          '<tr><td colspan="5"><div class="repo-status is-error">' +
+          escapeHtml(msg) +
+          ' <a href="https://github.com/' + GH_USER + '?tab=repositories" target="_blank" rel="noopener noreferrer">Open GitHub</a>' +
+          "</div></td></tr>";
+        if (syncEl) syncEl.textContent = "Could not sync stars";
+      }
+
+      function loadRepos() {
+        var url =
+          "https://api.github.com/users/" +
+          GH_USER +
+          "/repos?per_page=100&sort=updated&type=owner";
+
+        fetch(url, {
+          headers: { Accept: "application/vnd.github+json" }
+        })
+          .then(function (res) {
+            if (!res.ok) throw new Error("GitHub API " + res.status);
+            return res.json();
+          })
+          .then(function (data) {
+            if (!Array.isArray(data)) throw new Error("Unexpected API response");
+            var repos = data
+              .filter(function (r) {
+                return !r.fork && !r.archived && !SKIP_REPOS[r.name];
+              })
+              .sort(function (a, b) {
+                var ds = (b.stargazers_count || 0) - (a.stargazers_count || 0);
+                if (ds !== 0) return ds;
+                return new Date(b.pushed_at) - new Date(a.pushed_at);
+              });
+            renderRepos(repos);
+          })
+          .catch(function () {
+            renderError("Failed to load public repos.");
+          });
+      }
+
+      loadRepos();
+    })();
+  </script>
+</body>
+</html>
