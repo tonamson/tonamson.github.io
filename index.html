@@ -192,6 +192,28 @@
       width: min(100%, 52rem);
     }
 
+    .page-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.65rem 1rem;
+    }
+
+    .page-links a {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+      color: var(--faint);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .page-links a:hover {
+      color: var(--ink);
+      border-bottom-color: var(--line);
+    }
+
     .meta {
       font-family: var(--font-mono);
       font-size: 0.6875rem;
@@ -469,6 +491,7 @@
       .identity > *:nth-child(1) { animation-delay: 0.04s; }
       .identity > *:nth-child(2) { animation-delay: 0.1s; }
       .identity > *:nth-child(5) { animation-delay: 1.15s; }
+      .identity > *:nth-child(6) { animation-delay: 1.25s; }
     }
 
     @keyframes rise {
@@ -530,6 +553,9 @@
         github.com/tonamson
         <span class="arrow" aria-hidden="true">↗</span>
       </a>
+      <nav class="page-links" aria-label="Pages">
+        <a href="./vibe-code.html">vibe code →</a>
+      </nav>
     </div>
   </main>
 

@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Vibe code stack: Tasteskill, Code Review Graph, Serena, Superpowers, Headroom, Ponytail, RTK, Caveman - MCP & skills cho agent coding." />
+  <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f4f4f5" media="(prefers-color-scheme: light)" />
+  <meta property="og:title" content="Vibe Code - tonamson" />
+  <meta property="og:description" content="Bộ MCP & skills dùng khi vibe code: Tasteskill, Code Review Graph, Serena, Superpowers, Headroom, Ponytail, RTK, Caveman." />
+  <meta property="og:url" content="https://tonamson.github.io/vibe-code.html" />
+  <meta property="og:type" content="website" />
+  <title>Vibe Code - tonamson</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2309090b'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-family='system-ui,sans-serif' font-size='13' font-weight='600' fill='%23f4f4f5'%3Ev%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.bunny.net" />
+  <link href="https://fonts.bunny.net/css?family=jetbrains-mono:400,500|outfit:400,500,600,700" rel="stylesheet" />
+  <style>
+    /*
+      Redesign of vibe-code notes page.
+      Stack: vanilla HTML/CSS (same as home).
+      Reading: editorial developer notes - asymmetric, zinc neutrals, one blue accent.
+      Dials: VARIANCE 6 · MOTION 4 · DENSITY 3
+    */
+
+    :root {
+      --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+      --font-mono: "JetBrains Mono", ui-monospace, monospace;
+      --surface: #f4f4f5;
+      --surface-2: #ececee;
+      --elevated: #fafafa;
+      --ink: #18181b;
+      --muted: #52525b;
+      --faint: #a1a1aa;
+      --line: #d4d4d8;
+      --accent: #3b6fd4;
+      --accent-soft: color-mix(in oklab, var(--accent) 12%, var(--surface));
+      --shadow: 0 18px 48px -28px color-mix(in oklab, var(--ink) 35%, transparent);
+      --radius: 14px;
+      --radius-sm: 10px;
+      --max: 1120px;
+      --nav-h: 64px;
+      color-scheme: light;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --surface: #0c0c0e;
+        --surface-2: #141416;
+        --elevated: #121214;
+        --ink: #f4f4f5;
+        --muted: #a1a1aa;
+        --faint: #71717a;
+        --line: #27272a;
+        --accent: #6b9ef0;
+        --accent-soft: color-mix(in oklab, var(--accent) 14%, var(--surface));
+        --shadow: 0 22px 56px -28px color-mix(in oklab, #000 55%, transparent);
+        color-scheme: dark;
+      }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+    }
+
+    body {
+      min-height: 100dvh;
+      font-family: var(--font-sans);
+      background: var(--surface);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      line-height: 1.55;
+    }
+
+    ::selection {
+      background: color-mix(in oklab, var(--accent) 28%, transparent);
+      color: var(--ink);
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    code {
+      font-family: var(--font-mono);
+      font-size: 0.88em;
+      letter-spacing: -0.02em;
+    }
+
+    .skip {
+      position: absolute;
+      left: 1rem;
+      top: -100px;
+      z-index: 100;
+      padding: 0.55rem 0.85rem;
+      background: var(--elevated);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      font-size: 0.875rem;
+      color: var(--ink);
+    }
+    .skip:focus { top: 1rem; }
+
+    .grain {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      opacity: 0.035;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    @media (prefers-color-scheme: dark) {
+      .grain { opacity: 0.05; }
+    }
+
+    .ambient {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse 55% 40% at 12% -10%, color-mix(in oklab, var(--accent) 14%, transparent), transparent 70%),
+        radial-gradient(ellipse 45% 35% at 95% 20%, color-mix(in oklab, var(--accent) 8%, transparent), transparent 65%);
+    }
+
+    .wrap {
+      width: min(100% - 2rem, var(--max));
+      margin-inline: auto;
+      position: relative;
+      z-index: 1;
+    }
+    @media (min-width: 768px) {
+      .wrap { width: min(100% - 3rem, var(--max)); }
+    }
+
+    /* NAV */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      height: var(--nav-h);
+      border-bottom: 1px solid color-mix(in oklab, var(--line) 85%, transparent);
+      background: color-mix(in oklab, var(--surface) 82%, transparent);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .nav-inner {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .wordmark {
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      transition: color 0.15s ease;
+    }
+    .wordmark:hover { color: var(--accent); }
+    .nav-trail {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--faint);
+    }
+    .nav-trail a {
+      color: var(--muted);
+      transition: color 0.15s ease;
+    }
+    .nav-trail a:hover { color: var(--ink); }
+    .nav-trail .here { color: var(--ink); }
+
+    /* PAGE GRID */
+    .page {
+      display: grid;
+      gap: 2.5rem;
+      padding: 2.5rem 0 4rem;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 960px) {
+      .page {
+        grid-template-columns: 13.5rem minmax(0, 1fr);
+        gap: 3.5rem;
+        padding-top: 3.25rem;
+        align-items: start;
+      }
+    }
+
+    /* SIDE RAIL */
+    .rail {
+      display: none;
+    }
+    @media (min-width: 960px) {
+      .rail {
+        display: block;
+        position: sticky;
+        top: calc(var(--nav-h) + 1.5rem);
+      }
+    }
+    .rail-label {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin-bottom: 0.9rem;
+    }
+    .toc {
+      list-style: none;
+      display: grid;
+      gap: 0.15rem;
+      border-left: 1px solid var(--line);
+      padding-left: 0.85rem;
+    }
+    .toc a {
+      display: block;
+      padding: 0.35rem 0;
+      font-size: 0.8125rem;
+      color: var(--muted);
+      transition: color 0.15s ease, transform 0.15s ease;
+    }
+    .toc a:hover {
+      color: var(--ink);
+      transform: translateX(2px);
+    }
+    .toc a.is-active {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    /* HERO */
+    .hero {
+      padding-bottom: 0.5rem;
+    }
+    .hero-kicker {
+      margin: 0 0 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--faint);
+    }
+    .hero h1 {
+      margin: 0;
+      max-width: 10ch;
+      font-size: clamp(3rem, 9vw, 5rem);
+      font-weight: 600;
+      letter-spacing: -0.05em;
+      line-height: 0.95;
+    }
+    .hero-lead {
+      margin: 1.35rem 0 0;
+      max-width: 36rem;
+      font-size: clamp(1.05rem, 2.2vw, 1.2rem);
+      font-weight: 400;
+      line-height: 1.55;
+      letter-spacing: -0.015em;
+      color: var(--muted);
+      text-wrap: pretty;
+    }
+    .hero-lead em {
+      font-style: italic;
+      font-weight: 500;
+      color: var(--ink);
+      padding-bottom: 0.06em;
+    }
+
+    .chip-row {
+      margin-top: 1.75rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.4rem 0.75rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.02em;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: color-mix(in oklab, var(--elevated) 80%, var(--surface));
+      transition:
+        color 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+        background 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .chip:hover {
+      color: var(--ink);
+      border-color: color-mix(in oklab, var(--line) 40%, var(--ink));
+      background: var(--elevated);
+    }
+    .chip:active { transform: scale(0.98); }
+
+    /* FLOW */
+    .flow {
+      margin-top: 2.75rem;
+    }
+    .section-title {
+      margin: 0 0 1.15rem;
+      font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+      font-weight: 500;
+      letter-spacing: -0.03em;
+    }
+    .flow-list {
+      list-style: none;
+      display: grid;
+      gap: 0.65rem;
+    }
+    @media (min-width: 720px) {
+      .flow-list {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+      }
+      .flow-list li:last-child:nth-child(odd) {
+        grid-column: 1 / -1;
+      }
+    }
+    .flow-list li {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.85rem;
+      align-items: start;
+      padding: 1rem 1.1rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--elevated);
+      transition:
+        border-color 0.2s ease,
+        transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.2s ease;
+    }
+    .flow-list li:hover {
+      border-color: color-mix(in oklab, var(--line) 50%, var(--accent));
+      box-shadow: var(--shadow);
+      transform: translateY(-1px);
+    }
+    .step-n {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.04em;
+      color: var(--accent);
+      padding-top: 0.15rem;
+    }
+    .step-body strong {
+      display: block;
+      font-weight: 500;
+      font-size: 0.95rem;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+      margin-bottom: 0.25rem;
+    }
+    .step-body span {
+      display: block;
+      font-size: 0.875rem;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    /* INSTALL */
+    .install {
+      margin-top: 3.25rem;
+      scroll-margin-top: calc(var(--nav-h) + 1rem);
+    }
+    .install-head {
+      max-width: 40rem;
+      margin-bottom: 1.35rem;
+    }
+    .install-head p {
+      margin-top: 0.5rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      text-wrap: pretty;
+    }
+    .install-list {
+      list-style: none;
+      display: grid;
+      gap: 0.85rem;
+    }
+    .install-item {
+      padding: 1.1rem 1.15rem 1.2rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--elevated);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .install-item:hover {
+      border-color: color-mix(in oklab, var(--line) 45%, var(--accent));
+      box-shadow: var(--shadow);
+    }
+    .install-item header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.4rem 1rem;
+      margin-bottom: 0.65rem;
+    }
+    .install-item h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    .install-item .docs {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--accent);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s ease;
+    }
+    .install-item .docs:hover {
+      border-bottom-color: color-mix(in oklab, var(--accent) 45%, transparent);
+    }
+    .install-item pre {
+      margin: 0;
+      padding: 0.85rem 0.95rem;
+      overflow-x: auto;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      line-height: 1.55;
+      color: var(--ink);
+      background: var(--surface-2);
+      border: 1px solid color-mix(in oklab, var(--line) 80%, transparent);
+      border-radius: var(--radius-sm);
+      -webkit-overflow-scrolling: touch;
+    }
+    .install-item pre .cmt {
+      color: var(--faint);
+    }
+    .install-note {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+      max-width: 40rem;
+    }
+
+    /* TOOLS */
+    .tools {
+      margin-top: 3.25rem;
+    }
+    .tools-head {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      margin-bottom: 1.5rem;
+      max-width: 36rem;
+    }
+    .tools-head p {
+      color: var(--muted);
+      font-size: 0.975rem;
+      text-wrap: pretty;
+    }
+
+    .tool {
+      display: grid;
+      gap: 0.85rem 1.5rem;
+      padding: 1.5rem 0;
+      border-top: 1px solid var(--line);
+      scroll-margin-top: calc(var(--nav-h) + 1rem);
+    }
+    .tool:last-of-type {
+      border-bottom: 1px solid var(--line);
+    }
+    @media (min-width: 720px) {
+      .tool {
+        grid-template-columns: 4.5rem minmax(0, 1fr);
+        padding: 1.75rem 0.25rem 1.75rem 0;
+      }
+    }
+
+    .tool-index {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 500;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.06em;
+      color: var(--faint);
+      padding-top: 0.35rem;
+    }
+
+    .tool-main {
+      display: grid;
+      gap: 0.7rem;
+      min-width: 0;
+    }
+
+    .tool-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.45rem 1rem;
+    }
+    .tool-name {
+      font-size: clamp(1.2rem, 2.4vw, 1.4rem);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+    .tool-role {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      padding: 0.22rem 0.55rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface-2);
+    }
+
+    .tool-body {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 48rem;
+      text-wrap: pretty;
+    }
+    .tool-body strong {
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .tool-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem 1.25rem;
+    }
+    .tool-use {
+      font-size: 0.875rem;
+      color: var(--ink);
+      max-width: 36rem;
+    }
+    .tool-use b {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin-right: 0.4rem;
+    }
+
+    .tool-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      border-bottom: 1px solid transparent;
+      transition:
+        border-color 0.15s ease,
+        color 0.15s ease,
+        transform 0.15s ease;
+    }
+    .tool-link:hover {
+      border-bottom-color: color-mix(in oklab, var(--accent) 45%, transparent);
+    }
+    .tool-link:active { transform: scale(0.98); }
+    .tool-link .arr {
+      display: inline-block;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .tool-link:hover .arr {
+      transform: translate(2px, -2px);
+    }
+
+    /* NOTE / CLOSE */
+    .note {
+      margin-top: 3.5rem;
+      padding: 1.75rem 1.5rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(135deg, var(--accent-soft), transparent 55%),
+        var(--elevated);
+      max-width: 42rem;
+    }
+    @media (min-width: 720px) {
+      .note { padding: 2rem 2rem 2.1rem; }
+    }
+    .note h2 {
+      margin: 0 0 0.75rem;
+      font-size: clamp(1.2rem, 2.5vw, 1.45rem);
+      font-weight: 500;
+      letter-spacing: -0.03em;
+    }
+    .note p {
+      color: var(--muted);
+      font-size: 0.975rem;
+      max-width: 40rem;
+      text-wrap: pretty;
+    }
+    .note p + p { margin-top: 0.7rem; }
+    .note em {
+      font-style: italic;
+      color: var(--ink);
+      padding-bottom: 0.05em;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 1.75rem 0 2.5rem;
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.5rem;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+    footer a {
+      transition: color 0.15s ease;
+    }
+    footer a:hover { color: var(--accent); }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    /* REVEAL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition:
+        opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.is-in {
+      opacity: 1;
+      transform: none;
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#content">Bỏ qua điều hướng</a>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="ambient" aria-hidden="true"></div>
+
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="wordmark" href="./">tonamson</a>
+      <nav class="nav-trail" aria-label="Breadcrumb">
+        <a href="./">home</a>
+        <span aria-hidden="true">/</span>
+        <span class="here">vibe code</span>
+      </nav>
+    </div>
+  </header>
+
+  <div class="wrap page">
+    <aside class="rail" aria-label="Mục lục">
+      <p class="rail-label">Mục lục</p>
+      <ul class="toc">
+        <li><a href="#flow">Thứ tự dùng</a></li>
+        <li><a href="#install">Cài đặt nhanh</a></li>
+        <li><a href="#rtk">RTK</a></li>
+        <li><a href="#headroom">Headroom</a></li>
+        <li><a href="#serena">Serena</a></li>
+        <li><a href="#code-review-graph">Code Review Graph</a></li>
+        <li><a href="#superpowers">Superpowers</a></li>
+        <li><a href="#ponytail">Ponytail</a></li>
+        <li><a href="#caveman">Caveman</a></li>
+        <li><a href="#tasteskill">Tasteskill</a></li>
+        <li><a href="#note">Ghi chú</a></li>
+      </ul>
+    </aside>
+
+    <main id="content">
+      <header class="hero reveal">
+        <p class="hero-kicker">Notes / vibe coding</p>
+        <h1>Vibe Code</h1>
+        <p class="hero-lead">
+          Không phải prompt lung tung rồi cầu may.
+          Đây là <em>stack MCP + skills</em> mình dùng để agent code đúng việc:
+          hiểu repo, bớt token, bớt over-engineer, và ship UI có taste.
+        </p>
+        <div class="chip-row" aria-label="Nhảy tới tool">
+          <a class="chip" href="#install">Cài đặt nhanh</a>
+          <a class="chip" href="#rtk">RTK</a>
+          <a class="chip" href="#headroom">Headroom</a>
+          <a class="chip" href="#serena">Serena</a>
+          <a class="chip" href="#code-review-graph">Code Review Graph</a>
+          <a class="chip" href="#superpowers">Superpowers</a>
+          <a class="chip" href="#ponytail">Ponytail</a>
+          <a class="chip" href="#caveman">Caveman</a>
+          <a class="chip" href="#tasteskill">Tasteskill</a>
+        </div>
+      </header>
+
+      <section class="flow reveal" id="flow" aria-labelledby="flow-title">
+        <h2 class="section-title" id="flow-title">Thứ tự dùng (thực tế)</h2>
+        <ol class="flow-list">
+          <li>
+            <span class="step-n" aria-hidden="true">01</span>
+            <div class="step-body">
+              <strong>RTK + Headroom + Caveman</strong>
+              <span>Nén shell output, context, và prose agent - đừng đổ rác vào model.</span>
+            </div>
+          </li>
+          <li>
+            <span class="step-n" aria-hidden="true">02</span>
+            <div class="step-body">
+              <strong>Serena + Code Review Graph</strong>
+              <span>Đọc code theo symbol và graph, không grep mù cả repo.</span>
+            </div>
+          </li>
+          <li>
+            <span class="step-n" aria-hidden="true">03</span>
+            <div class="step-body">
+              <strong>Superpowers</strong>
+              <span>Ép workflow: nghĩ, plan, implement, review - không nhảy code bừa.</span>
+            </div>
+          </li>
+          <li>
+            <span class="step-n" aria-hidden="true">04</span>
+            <div class="step-body">
+              <strong>Ponytail</strong>
+              <span>Cắt over-engineering. YAGNI trước khi viết thêm layer.</span>
+            </div>
+          </li>
+          <li>
+            <span class="step-n" aria-hidden="true">05</span>
+            <div class="step-body">
+              <strong>Tasteskill</strong>
+              <span>Khi đụng UI/landing: design read + dial, anti-slop frontend.</span>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section class="install reveal" id="install" aria-labelledby="install-title">
+        <div class="install-head">
+          <h2 class="section-title" id="install-title">Cài đặt nhanh</h2>
+          <p>
+            Lệnh one-shot theo docs chính thức. Chạy trên máy bạn, restart agent sau khi cài.
+            Chi tiết / client khác xem link docs từng tool.
+          </p>
+        </div>
+        <ul class="install-list">
+          <li class="install-item">
+            <header>
+              <h3>RTK</h3>
+              <a class="docs" href="https://github.com/rtk-ai/rtk" target="_blank" rel="noopener noreferrer">docs ↗</a>
+            </header>
+            <pre><span class="cmt"># install (Homebrew hoặc curl)</span>
+brew install rtk
+<span class="cmt"># curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/refs/heads/master/install.sh | sh</span>
+
+<span class="cmt"># hook cho Claude Code / default</span>
+rtk init -g
+<span class="cmt"># Cursor: rtk init -g --agent cursor</span></pre>
+          </li>
+          <li class="install-item">
+            <header>
+              <h3>Headroom</h3>
+              <a class="docs" href="https://github.com/headroomlabs-ai/headroom" target="_blank" rel="noopener noreferrer">docs ↗</a>
+            </header>
+            <pre>uv tool install --python 3.13 "headroom-ai[all]"
+<span class="cmt"># hoặc: pip install "headroom-ai[all]"</span>
+
+headroom wrap claude
+<span class="cmt"># headroom wrap cursor | codex | aider …</span></pre>
+          </li>
+          <li class="install-item">
+            <header>
+              <h3>Caveman</h3>
+              <a class="docs" href="https://github.com/JuliusBrussee/caveman" target="_blank" rel="noopener noreferrer">docs ↗</a>
+            </header>
+            <pre><span class="cmt"># macOS / Linux / WSL - cài mọi agent có trên máy</span>
+curl -fsSL https://raw.githubusercontent.com/JuliusBrussee/caveman/main/install.sh | bash
+
+<span class="cmt"># bật: /caveman   · tắt: normal mode</span></pre>
+          </li>
+          <li class="install-item">
+            <header>
+              <h3>Serena</h3>
+              <a class="docs" href="https://oraios.github.io/serena/" target="_blank" rel="noopener noreferrer">docs ↗</a>
+            </header>
+            <pre><span class="cmt"># cần uv trước: https://docs.astral.sh/uv/</span>
+uv tool install -p 3.13 serena-agent
+serena init
+
+<span class="cmt"># rồi gắn MCP launch command vào Claude Code / Cursor / Codex…</span></pre>
+          </li>
+          <li class="install-item">
+            <header>
+              <h3>Code Review Graph</h3>
+              <a class="docs" href="https://github.com/tirth8205/code-review-graph" target="_blank" rel="noopener noreferrer">docs ↗</a>
+            </header>
+            <pre>pip install code-review-graph
+<span class="cmt"># hoặc: uv tool install code-review-graph</span>
+
+code-review-graph install
+code-review-graph build</pre>
+          </li>
+          <li class="install-item">
+            <header>
+              <h3>Superpowers</h3>
+              <a class="docs" href="https://github.com/obra/superpowers" target="_blank" rel="noopener noreferrer">docs ↗</a>
+            </header>
+            <pre><span class="cmt"># trong Claude Code</span>
+/plugin install superpowers@claude-plugins-official
+
+<span class="cmt"># hoặc marketplace Superpowers nếu dùng repo riêng</span>
+<span class="cmt"># /plugin marketplace add obra/superpowers-marketplace</span></pre>
+          </li>
+          <li class="install-item">
+            <header>
+              <h3>Ponytail</h3>
+              <a class="docs" href="https://github.com/DietrichGebert/ponytail" target="_blank" rel="noopener noreferrer">docs ↗</a>
+            </header>
+            <pre><span class="cmt"># Claude Code - gửi 2 lệnh riêng</span>
+/plugin marketplace add DietrichGebert/ponytail
+/plugin install ponytail@ponytail
+
+<span class="cmt"># multi-agent: npx skills add DietrichGebert/ponytail</span></pre>
+          </li>
+          <li class="install-item">
+            <header>
+              <h3>Tasteskill</h3>
+              <a class="docs" href="https://www.tasteskill.dev/" target="_blank" rel="noopener noreferrer">tasteskill.dev ↗</a>
+            </header>
+            <pre>npx skills add Leonxlnx/taste-skill
+
+<span class="cmt"># chỉ skill mặc định (design-taste-frontend / v2)</span>
+npx skills add https://github.com/Leonxlnx/taste-skill --skill "design-taste-frontend"</pre>
+          </li>
+        </ul>
+        <p class="install-note">
+          Thứ tự gợi ý: RTK + Caveman + Headroom trước (tiết token), rồi Serena / Graph (đọc code),
+          rồi Superpowers + Ponytail + Tasteskill (process / quality / UI).
+        </p>
+      </section>
+
+      <section class="tools" aria-labelledby="tools-title">
+        <div class="tools-head reveal">
+          <h2 class="section-title" id="tools-title">Bộ tool</h2>
+          <p>Mỗi cái một việc. Gộp lại thì vibe code đỡ kiểu “AI viết 500 dòng cho 5 dòng”.</p>
+        </div>
+
+        <article class="tool reveal" id="rtk">
+          <div class="tool-index" aria-hidden="true">01</div>
+          <div class="tool-main">
+            <div class="tool-top">
+              <h3 class="tool-name">RTK</h3>
+              <span class="tool-role">Token · CLI proxy</span>
+            </div>
+            <p class="tool-body">
+              <strong>Rust Token Killer</strong> - CLI proxy nén output lệnh dev
+              (git, ls, test log…) trước khi nhét vào context agent.
+              Thường tiết kiệm khoảng 60-90% token trên lệnh phổ biến, binary không dependency.
+            </p>
+            <div class="tool-meta">
+              <p class="tool-use"><b>Khi nào</b> Agent hay chạy shell và log dài làm đầy context.</p>
+              <a class="tool-link" href="https://github.com/rtk-ai/rtk" target="_blank" rel="noopener noreferrer">
+                github.com/rtk-ai/rtk <span class="arr" aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tool reveal" id="headroom">
+          <div class="tool-index" aria-hidden="true">02</div>
+          <div class="tool-main">
+            <div class="tool-top">
+              <h3 class="tool-name">Headroom</h3>
+              <span class="tool-role">Context compression</span>
+            </div>
+            <p class="tool-body">
+              Lớp nén context: tool output, log, file, RAG chunk - trước khi tới LLM.
+              Có dạng library / proxy / MCP. Giữ tín hiệu, bỏ phần lặp và noise.
+            </p>
+            <div class="tool-meta">
+              <p class="tool-use"><b>Khi nào</b> Session dài, nhiều tool call, JSON/log phình to.</p>
+              <a class="tool-link" href="https://github.com/headroomlabs-ai/headroom" target="_blank" rel="noopener noreferrer">
+                github.com/headroomlabs-ai/headroom <span class="arr" aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tool reveal" id="serena">
+          <div class="tool-index" aria-hidden="true">03</div>
+          <div class="tool-main">
+            <div class="tool-top">
+              <h3 class="tool-name">Serena</h3>
+              <span class="tool-role">MCP · IDE for agents</span>
+            </div>
+            <p class="tool-body">
+              MCP toolkit semantic: retrieval, edit, refactor theo symbol (LSP),
+              không chỉ đọc file theo dòng. Biến LLM thành agent làm việc trực tiếp
+              trên codebase như có IDE.
+            </p>
+            <div class="tool-meta">
+              <p class="tool-use"><b>Khi nào</b> Cần rename, find ref, nhảy symbol, refactor có cấu trúc.</p>
+              <a class="tool-link" href="https://github.com/oraios/serena" target="_blank" rel="noopener noreferrer">
+                github.com/oraios/serena <span class="arr" aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tool reveal" id="code-review-graph">
+          <div class="tool-index" aria-hidden="true">04</div>
+          <div class="tool-main">
+            <div class="tool-top">
+              <h3 class="tool-name">Code Review Graph</h3>
+              <span class="tool-role">MCP · code graph</span>
+            </div>
+            <p class="tool-body">
+              Local-first graph của repo (Tree-sitter): function, call, import, blast radius.
+              Agent query graph trước khi Grep/Read cả cây - review và explore rẻ token hơn nhiều.
+            </p>
+            <div class="tool-meta">
+              <p class="tool-use"><b>Khi nào</b> Review PR, impact analysis, “ai gọi function này”, large repo.</p>
+              <a class="tool-link" href="https://github.com/tirth8205/code-review-graph" target="_blank" rel="noopener noreferrer">
+                github.com/tirth8205/code-review-graph <span class="arr" aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tool reveal" id="superpowers">
+          <div class="tool-index" aria-hidden="true">05</div>
+          <div class="tool-main">
+            <div class="tool-top">
+              <h3 class="tool-name">Superpowers</h3>
+              <span class="tool-role">Skills · methodology</span>
+            </div>
+            <p class="tool-body">
+              Framework skill cho coding agent: brainstorm, plan, TDD/implement, review.
+              Ép agent dùng skill đúng lúc thay vì nhảy thẳng vào “viết code hộ”.
+            </p>
+            <div class="tool-meta">
+              <p class="tool-use"><b>Khi nào</b> Feature lớn, cần kỷ luật process, không one-shot bừa.</p>
+              <a class="tool-link" href="https://github.com/obra/superpowers" target="_blank" rel="noopener noreferrer">
+                github.com/obra/superpowers <span class="arr" aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tool reveal" id="ponytail">
+          <div class="tool-index" aria-hidden="true">06</div>
+          <div class="tool-main">
+            <div class="tool-top">
+              <h3 class="tool-name">Ponytail</h3>
+              <span class="tool-role">Skill · less code</span>
+            </div>
+            <p class="tool-body">
+              “Laziest senior dev”: hỏi có cần code không, ưu tiên stdlib / native, YAGNI cứng.
+              Benchmark: ít code hơn rõ (thường ~50%+, case over-build tới ~90%), vẫn giữ check an toàn.
+            </p>
+            <div class="tool-meta">
+              <p class="tool-use"><b>Khi nào</b> Agent thích thêm framework, abstraction, dashboard cho việc 10 dòng.</p>
+              <a class="tool-link" href="https://github.com/DietrichGebert/ponytail" target="_blank" rel="noopener noreferrer">
+                github.com/DietrichGebert/ponytail <span class="arr" aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tool reveal" id="caveman">
+          <div class="tool-index" aria-hidden="true">07</div>
+          <div class="tool-main">
+            <div class="tool-top">
+              <h3 class="tool-name">Caveman</h3>
+              <span class="tool-role">Skill · terse prose</span>
+            </div>
+            <p class="tool-body">
+              Ultra-compressed communication: agent nói ngắn như caveman, bỏ filler/hedging,
+              giữ nguyên code, lệnh, error string. Đo khoảng 65% ít token output; có lite / full / ultra
+              (và wenyan). Kèm compress file memory (<code>CLAUDE.md</code>…) để giảm input token mỗi session.
+            </p>
+            <div class="tool-meta">
+              <p class="tool-use"><b>Khi nào</b> Chat dài, context chật, muốn answer gọn nhưng technical vẫn đủ.</p>
+              <a class="tool-link" href="https://github.com/JuliusBrussee/caveman" target="_blank" rel="noopener noreferrer">
+                github.com/JuliusBrussee/caveman <span class="arr" aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tool reveal" id="tasteskill">
+          <div class="tool-index" aria-hidden="true">08</div>
+          <div class="tool-main">
+            <div class="tool-top">
+              <h3 class="tool-name">Tasteskill</h3>
+              <span class="tool-role">Skill · frontend taste</span>
+            </div>
+            <p class="tool-body">
+              <code>design-taste-frontend</code>: anti-slop cho landing / portfolio.
+              Design read, dials (variance / motion / density), pre-flight chặn pattern AI
+              (Inter default, purple glow, 3 card đều…).
+            </p>
+            <div class="tool-meta">
+              <p class="tool-use"><b>Khi nào</b> UI, redesign, page cá nhân - cần nhìn “người làm”, không “AI template”.</p>
+              <a class="tool-link" href="https://www.tasteskill.dev/" target="_blank" rel="noopener noreferrer">
+                tasteskill.dev <span class="arr" aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="note reveal" id="note" aria-labelledby="note-title">
+        <h2 id="note-title">Vibe code không phải tắt não</h2>
+        <p>
+          Vibe là tốc độ và flow. Stack này để agent <em>được dẫn</em>:
+          context gọn (RTK, Headroom, Caveman), code map (Serena, Graph), process (Superpowers),
+          tối giản (Ponytail), UI có critic (Tasteskill).
+        </p>
+        <p>
+          Còn ship hay không, vẫn là người review diff - và nhớ:
+          12 năm kinh nghiệm không bằng 1 giờ fix bug của người khác.
+        </p>
+      </section>
+    </main>
+  </div>
+
+  <footer class="wrap">
+    <span>tonamson / vibe code</span>
+    <div class="footer-links">
+      <a href="./">← home</a>
+      <a href="https://github.com/tonamson" target="_blank" rel="noopener noreferrer">github.com/tonamson</a>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var reveals = document.querySelectorAll(".reveal");
+
+      if (reduce) {
+        reveals.forEach(function (el) { el.classList.add("is-in"); });
+      } else if ("IntersectionObserver" in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-in");
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+        reveals.forEach(function (el) { io.observe(el); });
+      } else {
+        reveals.forEach(function (el) { el.classList.add("is-in"); });
+      }
+
+      /* TOC active state via section visibility */
+      var tocLinks = document.querySelectorAll(".toc a[href^='#']");
+      var sections = [];
+      tocLinks.forEach(function (a) {
+        var id = a.getAttribute("href").slice(1);
+        var el = document.getElementById(id);
+        if (el) sections.push({ id: id, el: el, link: a });
+      });
+
+      function setActive() {
+        var y = window.scrollY + 96;
+        var current = sections[0];
+        for (var i = 0; i < sections.length; i++) {
+          if (sections[i].el.offsetTop <= y) current = sections[i];
+        }
+        tocLinks.forEach(function (a) { a.classList.remove("is-active"); });
+        if (current) current.link.classList.add("is-active");
+      }
+
+      if (sections.length) {
+        setActive();
+        window.addEventListener("scroll", setActive, { passive: true });
+      }
+    })();
+  </script>
+</body>
+</html>

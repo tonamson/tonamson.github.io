@@ -1,9 +1,12 @@
 # tonamson.github.io
 
-Minimal matrix landing: **tonamson** + GitHub link.
+Minimal kinetic landing + notes on vibe-code tooling.
 
-- One file: [`index.html`](./index.html)
-- Site: https://tonamson.github.io
+| Page | URL |
+|------|-----|
+| Home | [`index.html`](./index.html) → https://tonamson.github.io |
+| Vibe Code | [`vibe-code.html`](./vibe-code.html) → https://tonamson.github.io/vibe-code.html |
+
 - GitHub: https://github.com/tonamson
 
 ## Preview
