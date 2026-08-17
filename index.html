@@ -3,18 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="tonamson. I ship practical tools: AI utilities, wallet scanners, and small products people can clone and run. TypeScript, Solidity, on-chain adjacent tooling." />
-  <meta name="theme-color" content="#0c0c0e" media="(prefers-color-scheme: dark)" />
-  <meta name="theme-color" content="#f4f4f5" media="(prefers-color-scheme: light)" />
-  <meta property="og:title" content="tonamson" />
+  <meta name="description" content="tonamson — Systems-minded developer shipping practical tools: AI utilities, wallet scanners, and small products people can clone and run. TypeScript, Solidity, on-chain tooling." />
+  <meta name="theme-color" content="#070709" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f7f7f9" media="(prefers-color-scheme: light)" />
+  <meta property="og:title" content="tonamson // Systems & Tools Builder" />
   <meta property="og:description" content="I ship practical tools: AI utilities, wallet scanners, and small products people can clone and run." />
   <meta property="og:url" content="https://tonamson.github.io/" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://tonamson.github.io/assets/img/hero-desk.jpg" />
-  <title>tonamson</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230c0c0e'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-family='system-ui,sans-serif' font-size='13' font-weight='600' fill='%23f4f4f5'%3Et%3C/text%3E%3C/svg%3E" />
+  <title>tonamson // Developer & Tool Builder</title>
+  
+  <script>
+    (function() {
+      var t = localStorage.getItem("theme");
+      if (t) {
+        document.documentElement.setAttribute("data-theme", t);
+      } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches) {
+        document.documentElement.setAttribute("data-theme", "light");
+      } else {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23070709'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-family='system-ui,sans-serif' font-size='13' font-weight='700' fill='%2338bdf8'%3Et%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.bunny.net" />
-  <link href="https://fonts.bunny.net/css?family=satoshi:400,500,600,700|jetbrains-mono:400,500" rel="stylesheet" />
+  <link href="https://fonts.bunny.net/css?family=satoshi:400,500,600,700,900|jetbrains-mono:400,500,600,700" rel="stylesheet" />
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
   <link rel="stylesheet" href="./assets/css/site.css" />
   <link rel="preload" as="image" href="./assets/img/hero-desk.jpg" />
@@ -23,17 +37,34 @@
   <a class="skip" href="#content">Skip to content</a>
   <div class="grain" aria-hidden="true"></div>
 
+  <!-- NAVIGATION -->
   <header class="nav">
     <div class="wrap nav-inner">
-      <a class="wordmark" href="./" aria-current="page">tonamson</a>
+      <div class="nav-brand-group">
+        <a class="wordmark" href="./" aria-current="page">
+          <span class="wordmark-bracket">[</span>tonamson<span class="wordmark-bracket">]</span>
+        </a>
+        <div class="nav-telemetry-badge">
+          <span class="telemetry-dot"></span>
+          <span>SYS.ONLINE</span>
+        </div>
+      </div>
+
       <nav class="nav-links" aria-label="Primary">
         <a href="#work">Work</a>
         <a href="#stack">Stack</a>
+        <a href="#terminal">Terminal</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
+        <a href="./vibe-code.html">Notes</a>
       </nav>
+
       <div class="nav-end">
-        <a class="nav-icon" href="https://github.com/tonamson" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+        <button class="nav-theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark/light theme" title="Toggle theme">
+          <i class="ph ph-sun theme-icon-sun" aria-hidden="true"></i>
+          <i class="ph ph-moon theme-icon-moon" aria-hidden="true"></i>
+        </button>
+        <a class="nav-icon" href="https://github.com/tonamson" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile" title="GitHub Profile">
           <i class="ph ph-github-logo" aria-hidden="true"></i>
         </a>
         <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="nav-panel" aria-label="Open menu">
@@ -43,152 +74,525 @@
       </div>
     </div>
   </header>
+
   <nav class="nav-panel" id="nav-panel" data-nav-panel aria-label="Mobile">
-    <a href="#work">Work</a>
-    <a href="#stack">Stack</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-    <a href="./vibe-code.html">Notes</a>
+    <a href="#work"><span>Work</span> <i class="ph ph-arrow-right"></i></a>
+    <a href="#stack"><span>Stack</span> <i class="ph ph-arrow-right"></i></a>
+    <a href="#terminal"><span>Terminal</span> <i class="ph ph-arrow-right"></i></a>
+    <a href="#about"><span>About</span> <i class="ph ph-arrow-right"></i></a>
+    <a href="#contact"><span>Contact</span> <i class="ph ph-arrow-right"></i></a>
+    <a href="./vibe-code.html"><span>Vibe Code Notes</span> <i class="ph ph-arrow-right"></i></a>
   </nav>
 
   <main id="content">
+    <!-- HERO SECTION -->
     <section class="hero wrap">
       <div class="hero-copy">
+        <div class="hero-meta-top">
+          <div class="hero-tag">
+            <i class="ph ph-terminal" aria-hidden="true"></i>
+            <span>FULLSTACK // ON-CHAIN TOOLING</span>
+          </div>
+          <div class="hero-tag hero-tag-secondary">
+            <i class="ph ph-sparkle" aria-hidden="true"></i>
+            <span>AVAILABLE FOR OSS</span>
+          </div>
+        </div>
+
         <h1 id="name" data-word="tonamson" aria-label="tonamson">tonamson</h1>
-        <p class="hero-lead">I ship practical tools: AI utilities, wallet scanners, and small products people can clone and run.</p>
+        
+        <p class="hero-subheading">
+          I build & ship <em>practical tools</em>: AI utilities, wallet scanners, and small products people can clone and run.
+        </p>
+
+        <p class="hero-lead">
+          TypeScript-heavy, systems-minded craft. Zero fluff, deterministic logic, and high-velocity developer workflows.
+        </p>
+
         <div class="hero-actions">
           <a class="btn btn-primary" data-magnetic href="#work">
-            View work
-            <span class="btn-ico" aria-hidden="true"><i class="ph ph-arrow-down"></i></span>
+            <span>Explore Work</span>
+            <span class="btn-ico" aria-hidden="true"><i class="ph ph-arrow-down-right"></i></span>
           </a>
           <a class="btn btn-ghost" href="https://github.com/tonamson" target="_blank" rel="noopener noreferrer">
-            GitHub
+            <span>GitHub Profile</span>
             <span class="btn-ico" aria-hidden="true"><i class="ph ph-arrow-up-right"></i></span>
           </a>
         </div>
       </div>
-      <figure class="hero-visual">
-        <img
-          src="./assets/img/hero-desk.jpg"
-          width="1152"
-          height="864"
-          alt="Night desk with a closed laptop, a monitor showing code, and a glass on dark wood."
-        />
-      </figure>
+
+      <!-- INTERACTIVE TERMINAL HUD -->
+      <div class="hero-hud reveal delay-1">
+        <div class="hud-topbar">
+          <div class="hud-controls">
+            <span class="hud-dot red"></span>
+            <span class="hud-dot yellow"></span>
+            <span class="hud-dot green"></span>
+          </div>
+          <span class="hud-title">tonamson@workspace:~</span>
+          <span style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--faint);">zsh // 64-bit</span>
+        </div>
+
+        <div class="hud-body">
+          <div class="hud-console" id="hud-console" role="log" aria-live="polite">
+            <div class="hud-line hud-response">Welcome to tonamson's interactive HUD. Type <span class="hud-highlight">help</span> or click command chips below:</div>
+            <div class="hud-line"><span class="hud-prompt">$</span> <span class="hud-highlight">whoami</span></div>
+            <div class="hud-line hud-response">tonamson — Tool builder (AI Agents, Wallets, Web3 & CLI utilities).</div>
+          </div>
+
+          <div class="hud-input-row">
+            <span class="hud-prompt">$</span>
+            <input type="text" id="hud-input" placeholder="Type a command (help, projects, stack, vibe)..." autocomplete="off" spellcheck="false" aria-label="Terminal input" />
+          </div>
+
+          <div class="hud-quick-cmds">
+            <button class="hud-chip" type="button" data-run="projects">$ projects</button>
+            <button class="hud-chip" type="button" data-run="stack">$ stack</button>
+            <button class="hud-chip" type="button" data-run="vibe">$ vibe</button>
+            <button class="hud-chip" type="button" data-run="theme">$ theme</button>
+            <button class="hud-chip" type="button" data-run="clear">$ clear</button>
+          </div>
+        </div>
+      </div>
     </section>
 
+    <!-- SELECTED WORK (ASYMMETRIC BENTO GRID) -->
     <section class="section wrap" id="work">
-      <h2 class="section-title reveal">Selected work</h2>
+      <div class="section-tag">01 // PROJECTS</div>
+      <div class="section-head reveal">
+        <div>
+          <h2 class="section-title">Selected work</h2>
+          <p class="section-subtitle">A curated index of published repositories, autonomous AI workflows, and on-chain scanners.</p>
+        </div>
+      </div>
+
+      <!-- Filter Bar -->
+      <div class="filter-bar reveal delay-1" role="toolbar" aria-label="Project categories">
+        <button class="filter-btn is-active" type="button" data-filter="all">
+          All <span class="filter-count">7</span>
+        </button>
+        <button class="filter-btn" type="button" data-filter="ai">
+          <i class="ph ph-sparkle" aria-hidden="true"></i> AI & Agents <span class="filter-count">2</span>
+        </button>
+        <button class="filter-btn" type="button" data-filter="web3">
+          <i class="ph ph-coins" aria-hidden="true"></i> Web3 & Wallets <span class="filter-count">3</span>
+        </button>
+        <button class="filter-btn" type="button" data-filter="tools">
+          <i class="ph ph-wrench" aria-hidden="true"></i> Developer Tools <span class="filter-count">2</span>
+        </button>
+      </div>
+
+      <!-- Asymmetric Bento Grid -->
       <div class="work-grid">
-        <a class="work-card work-featured reveal" href="https://github.com/tonamson/switch-acc-ai" target="_blank" rel="noopener noreferrer">
-          <div class="work-media">
-            <img src="./assets/img/work-code.jpg" width="1152" height="864" alt="" />
+        <!-- Card 1: switch-acc-ai (Large Featured Hero Card) -->
+        <div class="work-card work-card-large reveal delay-1" data-category="ai tools">
+          <div class="work-large-media">
+            <img src="./assets/img/work-code.jpg" width="1152" height="864" alt="switch-acc-ai code preview" />
           </div>
-          <div class="work-body">
-            <h3 class="work-name">switch-acc-ai</h3>
-            <p class="work-desc">AI-assisted account switching workflow.</p>
-            <ul class="work-tags" aria-label="Stack">
+          <div class="work-large-body">
+            <span class="work-card-index">01 / FEATURED OSS</span>
+            <div class="work-header">
+              <span class="work-badge badge-ai">
+                <i class="ph ph-sparkle" aria-hidden="true"></i> AI Workflow
+              </span>
+              <div class="work-card-actions">
+                <button class="card-icon-btn" type="button" data-copy="gh repo clone tonamson/switch-acc-ai" aria-label="Copy clone command" title="Copy clone command">
+                  <i class="ph ph-copy" aria-hidden="true"></i>
+                </button>
+                <a class="card-icon-btn" href="https://github.com/tonamson/switch-acc-ai" target="_blank" rel="noopener noreferrer" aria-label="GitHub Repo" title="GitHub Repo">
+                  <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+            <a class="work-name-link" href="https://github.com/tonamson/switch-acc-ai" target="_blank" rel="noopener noreferrer">
+              <h3 class="work-name">switch-acc-ai</h3>
+              <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+            </a>
+            <p class="work-desc">AI-assisted account switching workflow and session orchestrator. Manages complex multi-account state transitions with zero friction.</p>
+            <ul class="work-tags" aria-label="Tech Stack">
               <li class="chip">TypeScript</li>
+              <li class="chip">Node.js</li>
+              <li class="chip">AI Agent</li>
+              <li class="chip">Workflow Automation</li>
             </ul>
           </div>
-        </a>
+        </div>
 
-        <a class="work-card reveal delay-1" href="https://github.com/tonamson/translate-ai-extension" target="_blank" rel="noopener noreferrer">
-          <h3 class="work-name">translate-ai-extension</h3>
-          <p class="work-desc">Browser extension for AI-powered translation.</p>
-          <ul class="work-tags" aria-label="Stack">
-            <li class="chip">TypeScript</li>
-          </ul>
-        </a>
-
-        <a class="work-card reveal delay-2" href="https://github.com/tonamson/scan-wallet-evm" target="_blank" rel="noopener noreferrer">
-          <div class="work-thumb">
-            <img src="./assets/img/work-wallet.jpg" width="1248" height="832" alt="" />
+        <!-- Card 2: translate-ai-extension -->
+        <div class="work-card reveal delay-2" data-category="ai tools">
+          <span class="work-card-index">02 / BROWSER EXT</span>
+          <div class="work-header">
+            <span class="work-badge badge-ai">
+              <i class="ph ph-browsers" aria-hidden="true"></i> AI Extension
+            </span>
+            <div class="work-card-actions">
+              <button class="card-icon-btn" type="button" data-copy="gh repo clone tonamson/translate-ai-extension" aria-label="Copy clone command" title="Copy clone command">
+                <i class="ph ph-copy" aria-hidden="true"></i>
+              </button>
+              <a class="card-icon-btn" href="https://github.com/tonamson/translate-ai-extension" target="_blank" rel="noopener noreferrer" aria-label="GitHub Repo" title="GitHub Repo">
+                <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+              </a>
+            </div>
           </div>
-          <h3 class="work-name">scan-wallet-evm</h3>
-          <p class="work-desc">EVM wallet scanner.</p>
-          <ul class="work-tags" aria-label="Stack">
-            <li class="chip">JavaScript</li>
-          </ul>
-        </a>
-
-        <a class="work-card reveal delay-3" href="https://github.com/tonamson/scan-wallet-balance" target="_blank" rel="noopener noreferrer">
-          <h3 class="work-name">scan-wallet-balance</h3>
-          <p class="work-desc">Scan and report wallet balances.</p>
-          <ul class="work-tags" aria-label="Stack">
-            <li class="chip">JavaScript</li>
-          </ul>
-        </a>
-
-        <a class="work-card reveal delay-4" href="https://github.com/tonamson/wimt" target="_blank" rel="noopener noreferrer">
-          <h3 class="work-name">wimt</h3>
-          <p class="work-desc">Token and wallet utility.</p>
-          <ul class="work-tags" aria-label="Stack">
+          <a class="work-name-link" href="https://github.com/tonamson/translate-ai-extension" target="_blank" rel="noopener noreferrer">
+            <h3 class="work-name">translate-ai-extension</h3>
+            <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+          </a>
+          <p class="work-desc">Chrome Manifest V3 extension for contextual, low-latency AI translation directly inline across any web surface.</p>
+          <ul class="work-tags" aria-label="Tech Stack">
             <li class="chip">TypeScript</li>
+            <li class="chip">Manifest V3</li>
+            <li class="chip">LLM API</li>
           </ul>
+        </div>
+
+        <!-- Card 3: scan-wallet-evm -->
+        <div class="work-card reveal delay-3" data-category="web3">
+          <div class="work-thumb-wrap">
+            <img src="./assets/img/work-wallet.jpg" width="1248" height="832" alt="scan-wallet-evm preview" />
+          </div>
+          <span class="work-card-index">03 / ON-CHAIN SCANNER</span>
+          <div class="work-header">
+            <span class="work-badge badge-web3">
+              <i class="ph ph-coins" aria-hidden="true"></i> EVM Engine
+            </span>
+            <div class="work-card-actions">
+              <button class="card-icon-btn" type="button" data-copy="gh repo clone tonamson/scan-wallet-evm" aria-label="Copy clone command" title="Copy clone command">
+                <i class="ph ph-copy" aria-hidden="true"></i>
+              </button>
+              <a class="card-icon-btn" href="https://github.com/tonamson/scan-wallet-evm" target="_blank" rel="noopener noreferrer" aria-label="GitHub Repo" title="GitHub Repo">
+                <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+          <a class="work-name-link" href="https://github.com/tonamson/scan-wallet-evm" target="_blank" rel="noopener noreferrer">
+            <h3 class="work-name">scan-wallet-evm</h3>
+            <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+          </a>
+          <p class="work-desc">High-speed EVM address & contract scanner with multi-chain RPC concurrency and transaction indexing.</p>
+          <ul class="work-tags" aria-label="Tech Stack">
+            <li class="chip">JavaScript</li>
+            <li class="chip">EVM RPC</li>
+            <li class="chip">Multi-Chain</li>
+          </ul>
+        </div>
+
+        <!-- Card 4: scan-wallet-balance -->
+        <div class="work-card reveal delay-3" data-category="web3">
+          <span class="work-card-index">04 / WALLET BALANCES</span>
+          <div class="work-header">
+            <span class="work-badge badge-web3">
+              <i class="ph ph-wallet" aria-hidden="true"></i> On-Chain
+            </span>
+            <div class="work-card-actions">
+              <button class="card-icon-btn" type="button" data-copy="gh repo clone tonamson/scan-wallet-balance" aria-label="Copy clone command" title="Copy clone command">
+                <i class="ph ph-copy" aria-hidden="true"></i>
+              </button>
+              <a class="card-icon-btn" href="https://github.com/tonamson/scan-wallet-balance" target="_blank" rel="noopener noreferrer" aria-label="GitHub Repo" title="GitHub Repo">
+                <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+          <a class="work-name-link" href="https://github.com/tonamson/scan-wallet-balance" target="_blank" rel="noopener noreferrer">
+            <h3 class="work-name">scan-wallet-balance</h3>
+            <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+          </a>
+          <p class="work-desc">Scan, aggregate, and generate detailed JSON/CSV reports for multi-token wallet balances in real-time.</p>
+          <ul class="work-tags" aria-label="Tech Stack">
+            <li class="chip">JavaScript</li>
+            <li class="chip">Node.js</li>
+            <li class="chip">Token RPC</li>
+          </ul>
+        </div>
+
+        <!-- Card 5: wimt -->
+        <div class="work-card reveal delay-4" data-category="web3 tools">
+          <span class="work-card-index">05 / CLI UTILITY</span>
+          <div class="work-header">
+            <span class="work-badge badge-tool">
+              <i class="ph ph-cube" aria-hidden="true"></i> CLI Tool
+            </span>
+            <div class="work-card-actions">
+              <button class="card-icon-btn" type="button" data-copy="gh repo clone tonamson/wimt" aria-label="Copy clone command" title="Copy clone command">
+                <i class="ph ph-copy" aria-hidden="true"></i>
+              </button>
+              <a class="card-icon-btn" href="https://github.com/tonamson/wimt" target="_blank" rel="noopener noreferrer" aria-label="GitHub Repo" title="GitHub Repo">
+                <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+          <a class="work-name-link" href="https://github.com/tonamson/wimt" target="_blank" rel="noopener noreferrer">
+            <h3 class="work-name">wimt</h3>
+            <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+          </a>
+          <p class="work-desc">"Where Is My Token" — precision CLI tool to trace tokens across contract addresses and decentralized protocols.</p>
+          <ul class="work-tags" aria-label="Tech Stack">
+            <li class="chip">TypeScript</li>
+            <li class="chip">CLI Engine</li>
+            <li class="chip">Web3</li>
+          </ul>
+        </div>
+
+        <!-- Card 6: language-noob (Wide Card) -->
+        <div class="work-card reveal delay-4" data-category="tools">
+          <span class="work-card-index">06 / EXPERIMENT</span>
+          <div class="work-header">
+            <span class="work-badge badge-tool">
+              <i class="ph ph-translate" aria-hidden="true"></i> Engine
+            </span>
+            <div class="work-card-actions">
+              <button class="card-icon-btn" type="button" data-copy="gh repo clone tonamson/language-noob" aria-label="Copy clone command" title="Copy clone command">
+                <i class="ph ph-copy" aria-hidden="true"></i>
+              </button>
+              <a class="card-icon-btn" href="https://github.com/tonamson/language-noob" target="_blank" rel="noopener noreferrer" aria-label="GitHub Repo" title="GitHub Repo">
+                <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+          <a class="work-name-link" href="https://github.com/tonamson/language-noob" target="_blank" rel="noopener noreferrer">
+            <h3 class="work-name">language-noob</h3>
+            <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+          </a>
+          <p class="work-desc">Experimental language learning workbench, vocabulary parsing engine, and spaced repetition tokenizer.</p>
+          <ul class="work-tags" aria-label="Tech Stack">
+            <li class="chip">TypeScript</li>
+            <li class="chip">Parser AST</li>
+            <li class="chip">Algorithms</li>
+          </ul>
+        </div>
+
+        <!-- Card 7: sui-blockchain -->
+        <div class="work-card work-card-wide reveal delay-4" data-category="web3">
+          <span class="work-card-index">07 / MOVE SMART CONTRACTS</span>
+          <div class="work-header">
+            <span class="work-badge badge-web3">
+              <i class="ph ph-tree-structure" aria-hidden="true"></i> Move / Sui
+            </span>
+            <div class="work-card-actions">
+              <button class="card-icon-btn" type="button" data-copy="gh repo clone tonamson/sui-blockchain" aria-label="Copy clone command" title="Copy clone command">
+                <i class="ph ph-copy" aria-hidden="true"></i>
+              </button>
+              <a class="card-icon-btn" href="https://github.com/tonamson/sui-blockchain" target="_blank" rel="noopener noreferrer" aria-label="GitHub Repo" title="GitHub Repo">
+                <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+          <a class="work-name-link" href="https://github.com/tonamson/sui-blockchain" target="_blank" rel="noopener noreferrer">
+            <h3 class="work-name">sui-blockchain</h3>
+            <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+          </a>
+          <p class="work-desc">Smart contract packages, transaction builders, and dev tooling modules designed for the Sui Move object-centric ecosystem.</p>
+          <ul class="work-tags" aria-label="Tech Stack">
+            <li class="chip">Move</li>
+            <li class="chip">Sui Framework</li>
+            <li class="chip">Smart Contracts</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Repos Banner -->
+      <div class="work-more-banner reveal">
+        <p>Looking for more experimental code? <strong>Explore full public profile on GitHub:</strong></p>
+        <a class="btn btn-ghost" href="https://github.com/tonamson?tab=repositories" target="_blank" rel="noopener noreferrer">
+          <span>github.com/tonamson</span>
+          <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
         </a>
       </div>
-      <p class="work-more reveal">
-        More on GitHub:
-        <a href="https://github.com/tonamson/language-noob" target="_blank" rel="noopener noreferrer">language-noob</a>
-        <a href="https://github.com/tonamson/sui-blockchain" target="_blank" rel="noopener noreferrer">sui-blockchain</a>
-      </p>
     </section>
 
+    <!-- TECHNICAL STACK -->
     <section class="section wrap" id="stack">
-      <h2 class="section-title reveal">Stack</h2>
-      <div class="stack-groups">
-        <div class="stack-group reveal">
-          <h3>Languages</h3>
-          <ul class="stack-chips">
-            <li>TypeScript</li>
-            <li>JavaScript</li>
-            <li>Solidity</li>
-            <li>Move</li>
-          </ul>
+      <div class="section-tag">02 // ARCHITECTURE</div>
+      <div class="section-head reveal">
+        <div>
+          <h2 class="section-title">Technical stack</h2>
+          <p class="section-subtitle">Core frameworks, runtimes, and engineering primitives applied across daily tooling.</p>
         </div>
-        <div class="stack-group reveal delay-1">
-          <h3>Runtime and web</h3>
-          <ul class="stack-chips">
-            <li>Node.js</li>
-            <li>Browser extensions</li>
-            <li>REST</li>
-            <li>Git</li>
-          </ul>
+      </div>
+
+      <div class="stack-grid">
+        <!-- 1. Languages -->
+        <div class="stack-card reveal delay-1">
+          <div class="stack-card-head">
+            <div class="stack-icon" aria-hidden="true">
+              <i class="ph ph-code"></i>
+            </div>
+            <h3>Core Languages</h3>
+          </div>
+          <p>Strict types, deterministic runtime safety, and performance-first scripting.</p>
+          <div class="stack-items">
+            <div class="stack-item"><span>TypeScript</span><span class="stack-item-tag">Primary</span></div>
+            <div class="stack-item"><span>JavaScript</span><span class="stack-item-tag">ESNext</span></div>
+            <div class="stack-item"><span>Solidity</span><span class="stack-item-tag">EVM</span></div>
+            <div class="stack-item"><span>Move</span><span class="stack-item-tag">Sui</span></div>
+          </div>
         </div>
-        <div class="stack-group reveal delay-2">
-          <h3>AI and wallets</h3>
-          <ul class="stack-chips">
-            <li>AI APIs</li>
-            <li>Wallet scanning</li>
-          </ul>
+
+        <!-- 2. Web & Systems -->
+        <div class="stack-card reveal delay-2">
+          <div class="stack-card-head">
+            <div class="stack-icon" aria-hidden="true">
+              <i class="ph ph-cpu"></i>
+            </div>
+            <h3>Runtimes & Platform</h3>
+          </div>
+          <p>High-throughput server environments, browser extensions, and developer CI/CD.</p>
+          <div class="stack-items">
+            <div class="stack-item"><span>Node.js</span><span class="stack-item-tag">Runtime</span></div>
+            <div class="stack-item"><span>Chrome Ext</span><span class="stack-item-tag">Manifest V3</span></div>
+            <div class="stack-item"><span>REST & RPC</span><span class="stack-item-tag">APIs</span></div>
+            <div class="stack-item"><span>Git & GitHub</span><span class="stack-item-tag">Workflow</span></div>
+          </div>
+        </div>
+
+        <!-- 3. AI & Intelligent Tooling -->
+        <div class="stack-card reveal delay-3">
+          <div class="stack-card-head">
+            <div class="stack-icon" aria-hidden="true">
+              <i class="ph ph-sparkle"></i>
+            </div>
+            <h3>AI & Intelligence</h3>
+          </div>
+          <p>Practical LLM agent integration, automated context engineering, and translation systems.</p>
+          <div class="stack-items">
+            <div class="stack-item"><span>LLM APIs</span><span class="stack-item-tag">Gemini / OpenAI</span></div>
+            <div class="stack-item"><span>Agentic Systems</span><span class="stack-item-tag">Autonomous</span></div>
+            <div class="stack-item"><span>Prompt Tokens</span><span class="stack-item-tag">Context Ops</span></div>
+            <div class="stack-item"><span>CLI Tooling</span><span class="stack-item-tag">Dev UX</span></div>
+          </div>
+        </div>
+
+        <!-- 4. Blockchain & Wallets -->
+        <div class="stack-card reveal delay-4">
+          <div class="stack-card-head">
+            <div class="stack-icon" aria-hidden="true">
+              <i class="ph ph-coins"></i>
+            </div>
+            <h3>On-Chain & Wallets</h3>
+          </div>
+          <p>Multi-chain balance scanners, transaction indexers, and decentralized protocols.</p>
+          <div class="stack-items">
+            <div class="stack-item"><span>EVM RPCs</span><span class="stack-item-tag">Multi-chain</span></div>
+            <div class="stack-item"><span>Wallet Scanners</span><span class="stack-item-tag">Balance/Tx</span></div>
+            <div class="stack-item"><span>Sui Framework</span><span class="stack-item-tag">Move VM</span></div>
+            <div class="stack-item"><span>Smart Contracts</span><span class="stack-item-tag">On-chain</span></div>
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- TERMINAL COMMAND STATION -->
+    <section class="section wrap" id="terminal">
+      <div class="section-tag">03 // TERMINAL STATION</div>
+      <div class="section-head reveal">
+        <div>
+          <h2 class="section-title">Quick clone commands</h2>
+          <p class="section-subtitle">One-click copyable terminal snippets to clone and run projects locally.</p>
+        </div>
+      </div>
+
+      <div class="terminal-hud-full reveal delay-1">
+        <div class="terminal-hud-header">
+          <div class="hud-title">
+            <i class="ph ph-terminal-window" style="color: var(--accent);" aria-hidden="true"></i>
+            <span>BASH COMMAND DECK</span>
+          </div>
+          <div class="hud-status-badge">
+            <span class="telemetry-dot"></span>
+            <span>READY TO CLONE</span>
+          </div>
+        </div>
+
+        <div class="terminal-command-deck">
+          <div class="terminal-command-card">
+            <div class="command-snippet">
+              <span class="hud-prompt">$</span>
+              <span>git clone https://github.com/tonamson/switch-acc-ai.git</span>
+              <span class="command-meta">// AI Account Switcher</span>
+            </div>
+            <button class="copy-btn" type="button" data-copy="git clone https://github.com/tonamson/switch-acc-ai.git" aria-label="Copy switch-acc-ai clone command">
+              <i class="ph ph-copy" aria-hidden="true"></i> <span>Copy</span>
+            </button>
+          </div>
+
+          <div class="terminal-command-card">
+            <div class="command-snippet">
+              <span class="hud-prompt">$</span>
+              <span>git clone https://github.com/tonamson/scan-wallet-evm.git</span>
+              <span class="command-meta">// EVM Scanner</span>
+            </div>
+            <button class="copy-btn" type="button" data-copy="git clone https://github.com/tonamson/scan-wallet-evm.git" aria-label="Copy scan-wallet-evm clone command">
+              <i class="ph ph-copy" aria-hidden="true"></i> <span>Copy</span>
+            </button>
+          </div>
+
+          <div class="terminal-command-card">
+            <div class="command-snippet">
+              <span class="hud-prompt">$</span>
+              <span>git clone https://github.com/tonamson/wimt.git</span>
+              <span class="command-meta">// Token Tracer</span>
+            </div>
+            <button class="copy-btn" type="button" data-copy="git clone https://github.com/tonamson/wimt.git" aria-label="Copy wimt clone command">
+              <i class="ph ph-copy" aria-hidden="true"></i> <span>Copy</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
     <section class="section wrap" id="about">
+      <div class="section-tag">04 // PHILOSOPHY</div>
       <div class="about">
-        <p class="about-quote reveal">Kinh nghiệm 12 năm lập trình không bằng 1 giờ fix bug của người khác.</p>
+        <p class="about-quote reveal">
+          "Kinh nghiệm 12 năm lập trình không bằng 1 giờ fix bug của người khác."
+        </p>
+
         <div class="about-card reveal delay-2">
-          <img src="./assets/img/avatar.png" width="270" height="270" alt="Portrait of tonamson" />
-          <p>I build small, focused tools and open-source experiments. TypeScript-heavy. Comfortable across web, automation, and on-chain adjacent tooling.</p>
+          <div class="about-avatar-wrap">
+            <img src="./assets/img/avatar.png" width="270" height="270" alt="Portrait of tonamson" />
+            <div class="about-name-title">
+              <h3>tonamson</h3>
+              <p>Full-Stack / Systems Tool Builder</p>
+            </div>
+          </div>
+          <p class="about-card-text">
+            I build small, focused tools and open-source experiments. TypeScript-heavy. Comfortable across web, automation, and on-chain adjacent tooling.
+          </p>
         </div>
       </div>
     </section>
 
+    <!-- CONTACT SECTION -->
     <section class="section wrap contact" id="contact">
-      <a class="contact-link reveal" href="https://github.com/tonamson" target="_blank" rel="noopener noreferrer">
-        GitHub
-        <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
-      </a>
-      <span class="contact-handle reveal delay-1">github.com/tonamson</span>
+      <div class="section-tag">05 // CONNECT</div>
+      <div class="contact-card reveal">
+        <div>
+          <a class="contact-link" href="https://github.com/tonamson" target="_blank" rel="noopener noreferrer">
+            <span>github.com/tonamson</span>
+            <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+          </a>
+        </div>
+        <div class="contact-actions-bar">
+          <button class="btn btn-primary" type="button" data-copy="https://github.com/tonamson">
+            <i class="ph ph-copy" aria-hidden="true"></i>
+            <span>Copy Profile URL</span>
+          </button>
+          <a class="btn btn-ghost" href="./vibe-code.html">
+            <i class="ph ph-file-text" aria-hidden="true"></i>
+            <span>Read Vibe Code Notes</span>
+          </a>
+        </div>
+      </div>
     </section>
   </main>
 
+  <!-- FOOTER -->
   <footer class="wrap site-footer">
-    <span>tonamson · © 2026</span>
+    <span>tonamson // © 2026</span>
     <div class="footer-links">
-      <a href="./vibe-code.html">Notes</a>
+      <a href="#content">Top ↑</a>
+      <a href="./vibe-code.html">Vibe Code</a>
       <a href="https://github.com/tonamson/tonamson.github.io" target="_blank" rel="noopener noreferrer">Source</a>
     </div>
   </footer>

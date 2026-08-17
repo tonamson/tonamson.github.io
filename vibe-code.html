@@ -3,18 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Vibe code stack: Tasteskill, Code Review Graph, Serena, Superpowers, Headroom, Ponytail, RTK, Caveman - MCP & skills cho agent coding." />
-  <meta name="theme-color" content="#0c0c0e" media="(prefers-color-scheme: dark)" />
-  <meta name="theme-color" content="#f4f4f5" media="(prefers-color-scheme: light)" />
-  <meta property="og:title" content="Vibe Code - tonamson" />
+  <meta name="description" content="Vibe code stack: Tasteskill, Code Review Graph, Serena, Superpowers, Headroom, Ponytail, RTK, Caveman — MCP & skills tối ưu cho agent coding." />
+  <meta name="theme-color" content="#070709" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f7f7f9" media="(prefers-color-scheme: light)" />
+  <meta property="og:title" content="Vibe Code // AI Agent Stack — tonamson" />
   <meta property="og:description" content="Bộ MCP & skills dùng khi vibe code: Tasteskill, Code Review Graph, Serena, Superpowers, Headroom, Ponytail, RTK, Caveman." />
   <meta property="og:url" content="https://tonamson.github.io/vibe-code.html" />
-  <meta property="og:type" content="website" />
+  <meta property="og:type" content="article" />
   <meta property="og:image" content="https://tonamson.github.io/assets/img/notes-desk.jpg" />
-  <title>Vibe Code - tonamson</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230c0c0e'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-family='system-ui,sans-serif' font-size='13' font-weight='600' fill='%23f4f4f5'%3Ev%3C/text%3E%3C/svg%3E" />
+  <title>Vibe Code // AI Agent Stack — tonamson</title>
+  
+  <script>
+    (function() {
+      var t = localStorage.getItem("theme");
+      if (t) {
+        document.documentElement.setAttribute("data-theme", t);
+      } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches) {
+        document.documentElement.setAttribute("data-theme", "light");
+      } else {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23070709'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-family='system-ui,sans-serif' font-size='13' font-weight='700' fill='%2338bdf8'%3Ev%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.bunny.net" />
-  <link href="https://fonts.bunny.net/css?family=satoshi:400,500,600,700|jetbrains-mono:400,500" rel="stylesheet" />
+  <link href="https://fonts.bunny.net/css?family=satoshi:400,500,600,700,900|jetbrains-mono:400,500,600,700" rel="stylesheet" />
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
   <link rel="stylesheet" href="./assets/css/site.css" />
   <link rel="preload" as="image" href="./assets/img/notes-desk.jpg" />
@@ -23,17 +37,34 @@
   <a class="skip" href="#content">Bỏ qua điều hướng</a>
   <div class="grain" aria-hidden="true"></div>
 
+  <!-- NAVIGATION -->
   <header class="nav">
     <div class="wrap nav-inner">
-      <a class="wordmark" href="./">tonamson</a>
+      <div class="nav-brand-group">
+        <a class="wordmark" href="./">
+          <span class="wordmark-bracket">[</span>tonamson<span class="wordmark-bracket">]</span>
+        </a>
+        <div class="nav-telemetry-badge">
+          <span class="telemetry-dot"></span>
+          <span>DOCS.VIBE_CODE</span>
+        </div>
+      </div>
+
       <nav class="nav-links" aria-label="Primary">
         <a href="./#work">Work</a>
         <a href="./#stack">Stack</a>
+        <a href="./#terminal">Terminal</a>
         <a href="./#about">About</a>
         <a href="./#contact">Contact</a>
+        <a href="./vibe-code.html" aria-current="page">Notes</a>
       </nav>
+
       <div class="nav-end">
-        <a class="nav-icon" href="https://github.com/tonamson" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+        <button class="nav-theme-toggle" type="button" data-theme-toggle aria-label="Chuyển đổi giao diện Sáng/Tối" title="Chuyển đổi theme">
+          <i class="ph ph-sun theme-icon-sun" aria-hidden="true"></i>
+          <i class="ph ph-moon theme-icon-moon" aria-hidden="true"></i>
+        </button>
+        <a class="nav-icon" href="https://github.com/tonamson" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile" title="GitHub Profile">
           <i class="ph ph-github-logo" aria-hidden="true"></i>
         </a>
         <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="nav-panel" aria-label="Mở menu">
@@ -43,97 +74,147 @@
       </div>
     </div>
   </header>
+
   <nav class="nav-panel" id="nav-panel" data-nav-panel aria-label="Mobile">
-    <a href="./#work">Work</a>
-    <a href="./#stack">Stack</a>
-    <a href="./#about">About</a>
-    <a href="./#contact">Contact</a>
-    <a href="./vibe-code.html" aria-current="page">Notes</a>
+    <a href="./#work"><span>Work</span> <i class="ph ph-arrow-right"></i></a>
+    <a href="./#stack"><span>Stack</span> <i class="ph ph-arrow-right"></i></a>
+    <a href="./#terminal"><span>Terminal</span> <i class="ph ph-arrow-right"></i></a>
+    <a href="./#about"><span>About</span> <i class="ph ph-arrow-right"></i></a>
+    <a href="./#contact"><span>Contact</span> <i class="ph ph-arrow-right"></i></a>
+    <a href="./vibe-code.html" aria-current="page"><span>Vibe Code Notes</span> <i class="ph ph-arrow-right"></i></a>
   </nav>
 
+  <!-- NOTES HERO -->
   <section class="notes-hero">
     <div class="notes-hero-bg" aria-hidden="true">
-      <img src="./assets/img/notes-desk.jpg" width="1280" height="720" alt="" />
+      <img src="./assets/img/notes-desk.jpg" width="1280" height="720" alt="Workspace notes setup" />
     </div>
     <div class="wrap notes-hero-copy">
+      <div class="notes-badge">
+        <i class="ph ph-sparkle" aria-hidden="true"></i>
+        <span>AI AGENT ARCHITECTURE &amp; WORKFLOW</span>
+      </div>
       <h1>Vibe <em>Code</em></h1>
       <span class="notes-rule" aria-hidden="true"></span>
       <p class="notes-hero-lead">
-        Stack <em>MCP + skills</em> để agent hiểu repo, bớt token, và ship UI có taste.
+        Bộ stack <em>MCP + Skills</em> thực chiến giúp agent hiểu sâu codebase, tối ưu 80% token context và giữ vững taste kỹ thuật đỉnh cao.
       </p>
     </div>
   </section>
 
+  <!-- NOTES CONTENT WITH STICKY RAIL TOC -->
   <div class="wrap notes-page">
-    <aside class="rail" aria-label="Mục lục">
+    <aside class="rail" aria-label="Mục lục bài viết">
+      <div class="toc-header">// MỤC LỤC BÀI VIẾT</div>
       <ul class="toc">
-        <li><a href="#flow">Thứ tự dùng</a></li>
-        <li><a href="#install">Cài đặt nhanh</a></li>
-        <li><a href="#rtk">RTK</a></li>
-        <li><a href="#headroom">Headroom</a></li>
-        <li><a href="#serena">Serena</a></li>
-        <li><a href="#code-review-graph">Code Review Graph</a></li>
-        <li><a href="#superpowers">Superpowers</a></li>
-        <li><a href="#ponytail">Ponytail</a></li>
-        <li><a href="#caveman">Caveman</a></li>
-        <li><a href="#tasteskill">Tasteskill</a></li>
-        <li><a href="#note">Ghi chú</a></li>
+        <li><a href="#flow">01. Pipeline 5 bước</a></li>
+        <li><a href="#install">02. Cài đặt one-shot</a></li>
+        <li><a href="#rtk">03. RTK (Token Killer)</a></li>
+        <li><a href="#headroom">04. Headroom (Context)</a></li>
+        <li><a href="#caveman">05. Caveman (Terse)</a></li>
+        <li><a href="#serena">06. Serena (LSP IDE)</a></li>
+        <li><a href="#code-review-graph">07. Review Graph</a></li>
+        <li><a href="#superpowers">08. Superpowers</a></li>
+        <li><a href="#ponytail">09. Ponytail (YAGNI)</a></li>
+        <li><a href="#tasteskill">10. Tasteskill (UI/UX)</a></li>
+        <li><a href="#note">11. Triết lý Vibe Code</a></li>
       </ul>
     </aside>
 
     <main id="content">
+      <!-- 1. PIPELINE 5 BƯỚC -->
       <section class="reveal" id="flow" aria-labelledby="flow-title">
-        <h2 class="section-title" id="flow-title">Thứ tự dùng</h2>
+        <div class="section-tag">01 // EXECUTION PIPELINE</div>
+        <h2 class="section-title" id="flow-title">Quy trình 5 bước</h2>
+        <p class="section-subtitle" style="margin-bottom: 1.5rem;">Pipeline kỷ luật để giữ token window của agent luôn trong sạch, đọc code đúng chỗ và không over-engineer.</p>
+        
         <ol class="flow-list">
           <li class="flow-item">
-            <strong>Nén</strong>
-            <span>RTK + Headroom + Caveman. Nén shell output, context, và prose agent. Đừng đổ rác vào model.</span>
+            <div class="flow-item-head">
+              <strong>1. Nén Output &amp; Context</strong>
+              <span class="flow-step-num">PIPELINE.01</span>
+            </div>
+            <span><strong>RTK + Headroom + Caveman:</strong> Nén output shell command (git, npm, ls), lọc nhiễu JSON payload và rút gọn văn bản phản hồi. Giữ token window sạch cho những tác vụ quan trọng.</span>
           </li>
           <li class="flow-item">
-            <strong>Đọc</strong>
-            <span>Serena + Code Review Graph. Đọc code theo symbol và graph, không grep mù cả repo.</span>
+            <div class="flow-item-head">
+              <strong>2. Đọc Hiểu Bằng Graph &amp; Symbol</strong>
+              <span class="flow-step-num">PIPELINE.02</span>
+            </div>
+            <span><strong>Serena + Code Review Graph:</strong> Truy vấn AST và knowledge graph. Định vị chính xác symbol, caller/callee path thay vì grep mù quáng toàn bộ repository.</span>
           </li>
           <li class="flow-item">
-            <strong>Quy trình</strong>
-            <span>Superpowers. Ép workflow: nghĩ, plan, implement, review. Không nhảy code bừa.</span>
+            <div class="flow-item-head">
+              <strong>3. Kỷ Luật Quy Trình Từng Bước</strong>
+              <span class="flow-step-num">PIPELINE.03</span>
+            </div>
+            <span><strong>Superpowers:</strong> Thiết lập chu trình nghiêm ngặt: Brainstorming → Implementation Plan → TDD (viết test trước) → Verification độc lập trước khi hoàn thành.</span>
           </li>
           <li class="flow-item">
-            <strong>Cắt</strong>
-            <span>Ponytail. Cắt over-engineering. YAGNI trước khi viết thêm layer.</span>
+            <div class="flow-item-head">
+              <strong>4. Triệt Tiêu Over-Engineering</strong>
+              <span class="flow-step-num">PIPELINE.04</span>
+            </div>
+            <span><strong>Ponytail:</strong> Tư duy Senior lười biếng thông minh: YAGNI triệt để, ưu tiên Native API / Web Standards, loại bỏ mọi abstraction và dependency thừa thãi.</span>
           </li>
           <li class="flow-item">
-            <strong>Taste</strong>
-            <span>Tasteskill. Khi đụng UI/landing: design read + dial, anti-slop frontend.</span>
+            <div class="flow-item-head">
+              <strong>5. Tinh Chỉnh Thẩm Mỹ &amp; Craft</strong>
+              <span class="flow-step-num">PIPELINE.05</span>
+            </div>
+            <span><strong>Tasteskill (ui-ux-pro-max):</strong> Định hình visual direction, điều chỉnh dials (variance, motion, density) để tạo ra sản phẩm hoàn thiện sắc sảo, chống mọi kiểu AI-slop.</span>
           </li>
         </ol>
       </section>
 
+      <!-- 2. CÀI ĐẶT NHANH -->
       <section class="section reveal" id="install" aria-labelledby="install-title">
+        <div class="section-tag">02 // ONE-SHOT SCRIPTS</div>
         <div class="install-head">
           <h2 class="section-title" id="install-title">Cài đặt nhanh</h2>
           <p>
-            Lệnh one-shot theo docs chính thức. Chạy trên máy bạn, restart agent sau khi cài.
-            Chi tiết / client khác xem link docs từng tool.
+            Các lệnh thực thi chính thức. Nhấp nút <strong>Copy</strong> để copy trực tiếp vào terminal của bạn.
           </p>
         </div>
+
         <ul class="install-list">
+          <!-- RTK -->
           <li class="install-item">
             <header>
-              <h3>RTK</h3>
-              <a class="docs" href="https://github.com/rtk-ai/rtk" target="_blank" rel="noopener noreferrer">docs ↗</a>
+              <h3>
+                <i class="ph ph-terminal" style="color: var(--accent);" aria-hidden="true"></i>
+                <span>RTK (Rust Token Killer)</span>
+              </h3>
+              <div class="install-header-actions">
+                <span class="install-benchmark-tag">-60% to -90% shell tokens</span>
+                <button class="copy-btn" type="button" data-copy="brew install rtk && rtk init -g" aria-label="Copy lệnh RTK">
+                  <i class="ph ph-copy" aria-hidden="true"></i> <span>Copy</span>
+                </button>
+                <a class="docs" href="https://github.com/rtk-ai/rtk" target="_blank" rel="noopener noreferrer">docs ↗</a>
+              </div>
             </header>
-            <pre><span class="cmt"># install (Homebrew hoặc curl)</span>
+            <pre><span class="cmt"># Cài đặt qua Homebrew hoặc curl script</span>
 brew install rtk
 <span class="cmt"># curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/refs/heads/master/install.sh | sh</span>
 
-<span class="cmt"># hook cho Claude Code / default</span>
-rtk init -g
-<span class="cmt"># Cursor: rtk init -g --agent cursor</span></pre>
+<span class="cmt"># Kích hoạt hook toàn cục</span>
+rtk init -g</pre>
           </li>
+
+          <!-- Headroom -->
           <li class="install-item">
             <header>
-              <h3>Headroom</h3>
-              <a class="docs" href="https://github.com/headroomlabs-ai/headroom" target="_blank" rel="noopener noreferrer">docs ↗</a>
+              <h3>
+                <i class="ph ph-cpu" style="color: var(--accent);" aria-hidden="true"></i>
+                <span>Headroom</span>
+              </h3>
+              <div class="install-header-actions">
+                <span class="install-benchmark-tag">Context Proxy</span>
+                <button class="copy-btn" type="button" data-copy='uv tool install --python 3.13 "headroom-ai[all]" && headroom wrap claude' aria-label="Copy lệnh Headroom">
+                  <i class="ph ph-copy" aria-hidden="true"></i> <span>Copy</span>
+                </button>
+                <a class="docs" href="https://github.com/headroomlabs-ai/headroom" target="_blank" rel="noopener noreferrer">docs ↗</a>
+              </div>
             </header>
             <pre>uv tool install --python 3.13 "headroom-ai[all]"
 <span class="cmt"># hoặc: pip install "headroom-ai[all]"</span>
@@ -141,31 +222,64 @@ rtk init -g
 headroom wrap claude
 <span class="cmt"># headroom wrap cursor | codex | aider …</span></pre>
           </li>
+
+          <!-- Caveman -->
           <li class="install-item">
             <header>
-              <h3>Caveman</h3>
-              <a class="docs" href="https://github.com/JuliusBrussee/caveman" target="_blank" rel="noopener noreferrer">docs ↗</a>
+              <h3>
+                <i class="ph ph-chat-text" style="color: var(--accent);" aria-hidden="true"></i>
+                <span>Caveman</span>
+              </h3>
+              <div class="install-header-actions">
+                <span class="install-benchmark-tag">-65% output tokens</span>
+                <button class="copy-btn" type="button" data-copy="curl -fsSL https://raw.githubusercontent.com/JuliusBrussee/caveman/main/install.sh | bash" aria-label="Copy lệnh Caveman">
+                  <i class="ph ph-copy" aria-hidden="true"></i> <span>Copy</span>
+                </button>
+                <a class="docs" href="https://github.com/JuliusBrussee/caveman" target="_blank" rel="noopener noreferrer">docs ↗</a>
+              </div>
             </header>
-            <pre><span class="cmt"># macOS / Linux / WSL - cài mọi agent có trên máy</span>
+            <pre><span class="cmt"># macOS / Linux / WSL — cài tự động cho tất cả agent</span>
 curl -fsSL https://raw.githubusercontent.com/JuliusBrussee/caveman/main/install.sh | bash
 
-<span class="cmt"># bật: /caveman   · tắt: normal mode</span></pre>
+<span class="cmt"># Bật mode cô đọng: /caveman  ·  Tắt: normal mode</span></pre>
           </li>
+
+          <!-- Serena -->
           <li class="install-item">
             <header>
-              <h3>Serena</h3>
-              <a class="docs" href="https://oraios.github.io/serena/" target="_blank" rel="noopener noreferrer">docs ↗</a>
+              <h3>
+                <i class="ph ph-code-block" style="color: var(--accent);" aria-hidden="true"></i>
+                <span>Serena</span>
+              </h3>
+              <div class="install-header-actions">
+                <span class="install-benchmark-tag">LSP Semantic AST</span>
+                <button class="copy-btn" type="button" data-copy="uv tool install -p 3.13 serena-agent && serena init" aria-label="Copy lệnh Serena">
+                  <i class="ph ph-copy" aria-hidden="true"></i> <span>Copy</span>
+                </button>
+                <a class="docs" href="https://oraios.github.io/serena/" target="_blank" rel="noopener noreferrer">docs ↗</a>
+              </div>
             </header>
-            <pre><span class="cmt"># cần uv trước: https://docs.astral.sh/uv/</span>
+            <pre><span class="cmt"># Cần uv: https://docs.astral.sh/uv/</span>
 uv tool install -p 3.13 serena-agent
 serena init
 
-<span class="cmt"># rồi gắn MCP launch command vào Claude Code / Cursor / Codex…</span></pre>
+<span class="cmt"># MCP server sẵn sàng kết nối vào Claude Code / Cursor / Windsurf</span></pre>
           </li>
+
+          <!-- Code Review Graph -->
           <li class="install-item">
             <header>
-              <h3>Code Review Graph</h3>
-              <a class="docs" href="https://github.com/tirth8205/code-review-graph" target="_blank" rel="noopener noreferrer">docs ↗</a>
+              <h3>
+                <i class="ph ph-tree-structure" style="color: var(--accent);" aria-hidden="true"></i>
+                <span>Code Review Graph</span>
+              </h3>
+              <div class="install-header-actions">
+                <span class="install-benchmark-tag">Tree-Sitter Graph</span>
+                <button class="copy-btn" type="button" data-copy="pip install code-review-graph && code-review-graph install && code-review-graph build" aria-label="Copy lệnh Code Review Graph">
+                  <i class="ph ph-copy" aria-hidden="true"></i> <span>Copy</span>
+                </button>
+                <a class="docs" href="https://github.com/tirth8205/code-review-graph" target="_blank" rel="noopener noreferrer">docs ↗</a>
+              </div>
             </header>
             <pre>pip install code-review-graph
 <span class="cmt"># hoặc: uv tool install code-review-graph</span>
@@ -173,230 +287,270 @@ serena init
 code-review-graph install
 code-review-graph build</pre>
           </li>
-          <li class="install-item">
-            <header>
-              <h3>Superpowers</h3>
-              <a class="docs" href="https://github.com/obra/superpowers" target="_blank" rel="noopener noreferrer">docs ↗</a>
-            </header>
-            <pre><span class="cmt"># trong Claude Code</span>
-/plugin install superpowers@claude-plugins-official
 
-<span class="cmt"># hoặc marketplace Superpowers nếu dùng repo riêng</span>
-<span class="cmt"># /plugin marketplace add obra/superpowers-marketplace</span></pre>
-          </li>
+          <!-- Superpowers -->
           <li class="install-item">
             <header>
-              <h3>Ponytail</h3>
-              <a class="docs" href="https://github.com/DietrichGebert/ponytail" target="_blank" rel="noopener noreferrer">docs ↗</a>
+              <h3>
+                <i class="ph ph-lightning" style="color: var(--accent);" aria-hidden="true"></i>
+                <span>Superpowers</span>
+              </h3>
+              <div class="install-header-actions">
+                <span class="install-benchmark-tag">Discipline Engine</span>
+                <button class="copy-btn" type="button" data-copy="/plugin install superpowers@claude-plugins-official" aria-label="Copy lệnh Superpowers">
+                  <i class="ph ph-copy" aria-hidden="true"></i> <span>Copy</span>
+                </button>
+                <a class="docs" href="https://github.com/obra/superpowers" target="_blank" rel="noopener noreferrer">docs ↗</a>
+              </div>
             </header>
-            <pre><span class="cmt"># Claude Code - gửi 2 lệnh riêng</span>
+            <pre><span class="cmt"># Cài đặt qua Claude Code Plugins Official</span>
+/plugin install superpowers@claude-plugins-official</pre>
+          </li>
+
+          <!-- Ponytail -->
+          <li class="install-item">
+            <header>
+              <h3>
+                <i class="ph ph-scissors" style="color: var(--accent);" aria-hidden="true"></i>
+                <span>Ponytail</span>
+              </h3>
+              <div class="install-header-actions">
+                <span class="install-benchmark-tag">-50% to -90% code bloat</span>
+                <button class="copy-btn" type="button" data-copy="/plugin marketplace add DietrichGebert/ponytail && /plugin install ponytail@ponytail" aria-label="Copy lệnh Ponytail">
+                  <i class="ph ph-copy" aria-hidden="true"></i> <span>Copy</span>
+                </button>
+                <a class="docs" href="https://github.com/DietrichGebert/ponytail" target="_blank" rel="noopener noreferrer">docs ↗</a>
+              </div>
+            </header>
+            <pre><span class="cmt"># Cài qua marketplace</span>
 /plugin marketplace add DietrichGebert/ponytail
 /plugin install ponytail@ponytail
 
-<span class="cmt"># multi-agent: npx skills add DietrichGebert/ponytail</span></pre>
+<span class="cmt"># Multi-agent: npx skills add DietrichGebert/ponytail</span></pre>
           </li>
+
+          <!-- Tasteskill -->
           <li class="install-item">
             <header>
-              <h3>Tasteskill</h3>
-              <a class="docs" href="https://www.tasteskill.dev/" target="_blank" rel="noopener noreferrer">tasteskill.dev ↗</a>
+              <h3>
+                <i class="ph ph-palette" style="color: var(--accent);" aria-hidden="true"></i>
+                <span>Tasteskill (ui-ux-pro-max)</span>
+              </h3>
+              <div class="install-header-actions">
+                <span class="install-benchmark-tag">Anti-AI-Slop</span>
+                <button class="copy-btn" type="button" data-copy="npx skills add Leonxlnx/taste-skill" aria-label="Copy lệnh Tasteskill">
+                  <i class="ph ph-copy" aria-hidden="true"></i> <span>Copy</span>
+                </button>
+                <a class="docs" href="https://www.tasteskill.dev/" target="_blank" rel="noopener noreferrer">tasteskill.dev ↗</a>
+              </div>
             </header>
             <pre>npx skills add Leonxlnx/taste-skill
 
-<span class="cmt"># chỉ skill mặc định (design-taste-frontend / v2)</span>
+<span class="cmt"># Cài riêng skill design-taste-frontend</span>
 npx skills add https://github.com/Leonxlnx/taste-skill --skill "design-taste-frontend"</pre>
           </li>
         </ul>
-        <p class="install-note">
-          Thứ tự gợi ý: RTK + Caveman + Headroom trước (tiết token), rồi Serena / Graph (đọc code),
-          rồi Superpowers + Ponytail + Tasteskill (process / quality / UI).
-        </p>
+
+        <div class="install-note">
+          <strong>⚡ Thứ tự thiết lập vàng:</strong> Cài <em>RTK + Caveman + Headroom</em> trước để tiết kiệm token, sau đó cài <em>Serena / Graph</em> để hiểu code theo cấu trúc, và hoàn tất với <em>Superpowers + Ponytail + Tasteskill</em> để quản lý quy trình, chất lượng và thẩm mỹ frontend.
+        </div>
       </section>
 
+      <!-- 3. BỘ TOOL CHI TIẾT -->
       <section aria-labelledby="tools-title">
+        <div class="section-tag">03 // TOOL DEEP DIVE</div>
         <div class="tools-head reveal">
-          <h2 class="section-title" id="tools-title">Bộ tool</h2>
-          <p>Mỗi cái một việc. Gộp lại thì vibe code đỡ kiểu “AI viết 500 dòng cho 5 dòng”.</p>
+          <h2 class="section-title" id="tools-title">Bộ công cụ chuyên sâu</h2>
+          <p>Mỗi công cụ là một vũ khí sắc bén giải quyết triệt để từng điểm nghẽn của LLM khi viết code thực tế.</p>
         </div>
 
+        <!-- RTK -->
         <article class="tool reveal" id="rtk">
           <div>
             <h3 class="tool-name">RTK</h3>
-            <span class="tool-role">Token · CLI proxy</span>
+            <span class="tool-role">TOKEN KILLER // CLI PROXY</span>
           </div>
           <div>
             <p class="tool-body">
-              <strong>Rust Token Killer</strong> - CLI proxy nén output lệnh dev
-              (git, ls, test log…) trước khi nhét vào context agent.
-              Thường tiết kiệm khoảng 60-90% token trên lệnh phổ biến, binary không dependency.
+              <strong>Rust Token Killer</strong> — CLI proxy thông minh chặn đứng tình trạng phình token khi agent chạy lệnh shell.
+              Nén git diff, npm test, log build thành dạng tóm tắt cô đọng nhất trước khi đưa vào context window của model.
             </p>
             <div class="tool-meta">
-              <p class="tool-use"><b>Khi nào</b> Agent hay chạy shell và log dài làm đầy context.</p>
+              <p class="tool-use"><b>KHI NÀO DÙNG:</b> Agent liên tục thực thi command line và sinh log dài dòng gây tràn token.</p>
               <a class="tool-link" href="https://github.com/rtk-ai/rtk" target="_blank" rel="noopener noreferrer">
-                github.com/rtk-ai/rtk <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+                <span>github.com/rtk-ai/rtk</span> <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
               </a>
             </div>
           </div>
         </article>
 
+        <!-- Headroom -->
         <article class="tool reveal" id="headroom">
           <div>
             <h3 class="tool-name">Headroom</h3>
-            <span class="tool-role">Context compression</span>
+            <span class="tool-role">CONTEXT COMPRESSION // PROXY</span>
           </div>
           <div>
             <p class="tool-body">
-              Lớp nén context: tool output, log, file, RAG chunk - trước khi tới LLM.
-              Có dạng library / proxy / MCP. Giữ tín hiệu, bỏ phần lặp và noise.
+              Bộ lọc nén context theo thời gian thực: lọc bớt các đoạn JSON dài, log hệ thống, RAG chunk thừa trước khi gửi đến model.
+              Giữ trọn vẹn tín hiệu kỹ thuật quan trọng và loại bỏ 100% rác dư thừa.
             </p>
             <div class="tool-meta">
-              <p class="tool-use"><b>Khi nào</b> Session dài, nhiều tool call, JSON/log phình to.</p>
+              <p class="tool-use"><b>KHI NÀO DÙNG:</b> Phiên làm việc kéo dài, nhiều lượt gọi tool call liên tiếp làm đầy bộ nhớ context.</p>
               <a class="tool-link" href="https://github.com/headroomlabs-ai/headroom" target="_blank" rel="noopener noreferrer">
-                github.com/headroomlabs-ai/headroom <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+                <span>github.com/headroomlabs-ai/headroom</span> <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
               </a>
             </div>
           </div>
         </article>
 
-        <article class="tool reveal" id="serena">
-          <div>
-            <h3 class="tool-name">Serena</h3>
-            <span class="tool-role">MCP · IDE for agents</span>
-          </div>
-          <div>
-            <p class="tool-body">
-              MCP toolkit semantic: retrieval, edit, refactor theo symbol (LSP),
-              không chỉ đọc file theo dòng. Biến LLM thành agent làm việc trực tiếp
-              trên codebase như có IDE.
-            </p>
-            <div class="tool-meta">
-              <p class="tool-use"><b>Khi nào</b> Cần rename, find ref, nhảy symbol, refactor có cấu trúc.</p>
-              <a class="tool-link" href="https://github.com/oraios/serena" target="_blank" rel="noopener noreferrer">
-                github.com/oraios/serena <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <article class="tool reveal" id="code-review-graph">
-          <div>
-            <h3 class="tool-name">Code Review Graph</h3>
-            <span class="tool-role">MCP · code graph</span>
-          </div>
-          <div>
-            <p class="tool-body">
-              Local-first graph của repo (Tree-sitter): function, call, import, blast radius.
-              Agent query graph trước khi Grep/Read cả cây - review và explore rẻ token hơn nhiều.
-            </p>
-            <div class="tool-meta">
-              <p class="tool-use"><b>Khi nào</b> Review PR, impact analysis, “ai gọi function này”, large repo.</p>
-              <a class="tool-link" href="https://github.com/tirth8205/code-review-graph" target="_blank" rel="noopener noreferrer">
-                github.com/tirth8205/code-review-graph <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <article class="tool reveal" id="superpowers">
-          <div>
-            <h3 class="tool-name">Superpowers</h3>
-            <span class="tool-role">Skills · methodology</span>
-          </div>
-          <div>
-            <p class="tool-body">
-              Framework skill cho coding agent: brainstorm, plan, TDD/implement, review.
-              Ép agent dùng skill đúng lúc thay vì nhảy thẳng vào “viết code hộ”.
-            </p>
-            <div class="tool-meta">
-              <p class="tool-use"><b>Khi nào</b> Feature lớn, cần kỷ luật process, không one-shot bừa.</p>
-              <a class="tool-link" href="https://github.com/obra/superpowers" target="_blank" rel="noopener noreferrer">
-                github.com/obra/superpowers <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <article class="tool reveal" id="ponytail">
-          <div>
-            <h3 class="tool-name">Ponytail</h3>
-            <span class="tool-role">Skill · less code</span>
-          </div>
-          <div>
-            <p class="tool-body">
-              “Laziest senior dev”: hỏi có cần code không, ưu tiên stdlib / native, YAGNI cứng.
-              Benchmark: ít code hơn rõ (thường ~50%+, case over-build tới ~90%), vẫn giữ check an toàn.
-            </p>
-            <div class="tool-meta">
-              <p class="tool-use"><b>Khi nào</b> Agent thích thêm framework, abstraction, dashboard cho việc 10 dòng.</p>
-              <a class="tool-link" href="https://github.com/DietrichGebert/ponytail" target="_blank" rel="noopener noreferrer">
-                github.com/DietrichGebert/ponytail <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
-              </a>
-            </div>
-          </div>
-        </article>
-
+        <!-- Caveman -->
         <article class="tool reveal" id="caveman">
           <div>
             <h3 class="tool-name">Caveman</h3>
-            <span class="tool-role">Skill · terse prose</span>
+            <span class="tool-role">TERSE PROSE // TOKEN SAVER</span>
           </div>
           <div>
             <p class="tool-body">
-              Ultra-compressed communication: agent nói ngắn như caveman, bỏ filler/hedging,
-              giữ nguyên code, lệnh, error string. Đo khoảng 65% ít token output; có lite / full / ultra
-              (và wenyan). Kèm compress file memory (<code>CLAUDE.md</code>…) để giảm input token mỗi session.
+              Rút gọn văn phong giao tiếp của AI về mức tối giản tuyệt đối (caveman style), loại bỏ hoàn toàn các câu mở bài/kết bài sáo rỗng,
+              trong khi giữ nguyên 100% độ chính xác của mã nguồn, lệnh command và thông báo lỗi.
             </p>
             <div class="tool-meta">
-              <p class="tool-use"><b>Khi nào</b> Chat dài, context chật, muốn answer gọn nhưng technical vẫn đủ.</p>
+              <p class="tool-use"><b>KHI NÀO DÙNG:</b> Muốn agent phản hồi tức thì, không rườm rà, tập trung vào code thay vì văn bản.</p>
               <a class="tool-link" href="https://github.com/JuliusBrussee/caveman" target="_blank" rel="noopener noreferrer">
-                github.com/JuliusBrussee/caveman <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+                <span>github.com/JuliusBrussee/caveman</span> <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
               </a>
             </div>
           </div>
         </article>
 
-        <article class="tool reveal" id="tasteskill">
+        <!-- Serena -->
+        <article class="tool reveal" id="serena">
           <div>
-            <h3 class="tool-name">Tasteskill</h3>
-            <span class="tool-role">Skill · frontend taste</span>
+            <h3 class="tool-name">Serena</h3>
+            <span class="tool-role">MCP // SEMANTIC LSP IDE</span>
           </div>
           <div>
             <p class="tool-body">
-              <code>design-taste-frontend</code>: anti-slop cho landing / portfolio.
-              Design read, dials (variance / motion / density), pre-flight chặn pattern AI
-              (Inter default, purple glow, 3 card đều…).
+              Bộ công cụ MCP cấp độ LSP: tìm kiếm, chỉnh sửa và tái cấu trúc code theo symbol ngữ nghĩa (functions, classes, types),
+              không đơn thuần đọc file thô từng dòng. Biến AI model thành lập trình viên thao tác trực tiếp trên IDE.
             </p>
             <div class="tool-meta">
-              <p class="tool-use"><b>Khi nào</b> UI, redesign, page cá nhân - cần nhìn “người làm”, không “AI template”.</p>
+              <p class="tool-use"><b>KHI NÀO DÙNG:</b> Cần rename symbol an toàn, find references, nhảy đến định nghĩa hàm trong codebase lớn.</p>
+              <a class="tool-link" href="https://github.com/oraios/serena" target="_blank" rel="noopener noreferrer">
+                <span>github.com/oraios/serena</span> <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Code Review Graph -->
+        <article class="tool reveal" id="code-review-graph">
+          <div>
+            <h3 class="tool-name">Code Review Graph</h3>
+            <span class="tool-role">MCP // KNOWLEDGE GRAPH</span>
+          </div>
+          <div>
+            <p class="tool-body">
+              Xây dựng đồ thị cục bộ (Tree-sitter) thể hiện quan hệ gọi hàm, import và vùng ảnh hưởng (blast radius).
+              Agent truy vấn graph nhanh trước khi phải đọc toàn bộ cây thư mục, giúp review PR và trace bug nhanh gấp nhiều lần.
+            </p>
+            <div class="tool-meta">
+              <p class="tool-use"><b>KHI NÀO DÙNG:</b> Review PR phức tạp, đánh giá rủi ro thay đổi hàm lõi, phân tích kiến trúc dự án.</p>
+              <a class="tool-link" href="https://github.com/tirth8205/code-review-graph" target="_blank" rel="noopener noreferrer">
+                <span>github.com/tirth8205/code-review-graph</span> <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Superpowers -->
+        <article class="tool reveal" id="superpowers">
+          <div>
+            <h3 class="tool-name">Superpowers</h3>
+            <span class="tool-role">FRAMEWORK // METHODOLOGY</span>
+          </div>
+          <div>
+            <p class="tool-body">
+              Bộ quy tắc kỹ thuật nghiêm ngặt: buộc agent phải trải qua các bước brainstorming, lập kế hoạch chi tiết, TDD và review độc lập.
+              Ngăn chặn tuyệt đối việc AI code ẩu hoặc one-shot thiếu kiểm soát.
+            </p>
+            <div class="tool-meta">
+              <p class="tool-use"><b>KHI NÀO DÙNG:</b> Xây dựng feature lớn, cần tính kỷ luật cao và kiểm thử hoàn chỉnh trước khi merge.</p>
+              <a class="tool-link" href="https://github.com/obra/superpowers" target="_blank" rel="noopener noreferrer">
+                <span>github.com/obra/superpowers</span> <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Ponytail -->
+        <article class="tool reveal" id="ponytail">
+          <div>
+            <h3 class="tool-name">Ponytail</h3>
+            <span class="tool-role">LESS CODE // YAGNI DISCIPLINE</span>
+          </div>
+          <div>
+            <p class="tool-body">
+              Áp dụng triệt để nguyên lý YAGNI (You Aren't Gonna Need It): đặt câu hỏi phản biện xem có cần viết thêm dòng code nào không,
+              ưu tiên stdlib / native APIs. Giảm <strong>50% – 90%</strong> lượng mã dư thừa.
+            </p>
+            <div class="tool-meta">
+              <p class="tool-use"><b>KHI NÀO DÙNG:</b> AI có dấu hiệu tạo boilerplate phức tạp, thêm library không cần thiết cho logic đơn giản.</p>
+              <a class="tool-link" href="https://github.com/DietrichGebert/ponytail" target="_blank" rel="noopener noreferrer">
+                <span>github.com/DietrichGebert/ponytail</span> <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Tasteskill -->
+        <article class="tool reveal" id="tasteskill">
+          <div>
+            <h3 class="tool-name">Tasteskill</h3>
+            <span class="tool-role">FRONTEND // TASTE &amp; CRAFT</span>
+          </div>
+          <div>
+            <p class="tool-body">
+              Kỹ năng frontend chống "AI-slop": điều chỉnh design read, tinh chỉnh các thanh trượt dials (variance / motion / density),
+              đảm bảo mọi giao diện web đều mang tính nghệ thuật, đậm chất craft và phá cách.
+            </p>
+            <div class="tool-meta">
+              <p class="tool-use"><b>KHI NÀO DÙNG:</b> Xây dựng landing page, portfolio cá nhân, web app cần tính thẩm mỹ vượt trội.</p>
               <a class="tool-link" href="https://www.tasteskill.dev/" target="_blank" rel="noopener noreferrer">
-                tasteskill.dev <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+                <span>tasteskill.dev</span> <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
               </a>
             </div>
           </div>
         </article>
       </section>
 
+      <!-- 4. NOTE CUỐI -->
       <section class="note reveal" id="note" aria-labelledby="note-title">
         <div class="note-bg" aria-hidden="true">
-          <img src="./assets/img/notes-desk.jpg" width="1280" height="720" alt="" />
+          <img src="./assets/img/notes-desk.jpg" width="1280" height="720" alt="Desk background" />
         </div>
-        <h2 id="note-title">Vibe code không phải tắt não</h2>
+        <div class="section-tag" style="position: relative; z-index: 1;">04 // CORE PHILOSOPHY</div>
+        <h2 id="note-title">Vibe code không phải là tắt não</h2>
         <p>
-          Vibe là tốc độ và flow. Stack này để agent <em>được dẫn</em>:
-          context gọn (RTK, Headroom, Caveman), code map (Serena, Graph), process (Superpowers),
-          tối giản (Ponytail), UI có critic (Tasteskill).
+          Vibe là tốc độ, khả năng làm chủ công cụ và sự liền mạch trong luồng tư duy. Bộ stack này giúp agent <em>được dẫn dắt chính xác</em>:
+          context luôn tinh gọn (RTK, Headroom, Caveman), bản đồ code rõ ràng (Serena, Graph), kỷ luật quy trình (Superpowers),
+          tối giản cấu trúc (Ponytail), và mắt nhìn thiết kế sắc nét (Tasteskill).
         </p>
         <p>
-          Còn ship hay không, vẫn là người review diff - và nhớ:
-          12 năm kinh nghiệm không bằng 1 giờ fix bug của người khác.
+          Quyết định ship sản phẩm cuối cùng vẫn luôn thuộc về người lập trình viên review diff — và hãy luôn nhớ:
+          <em>"Kinh nghiệm 12 năm lập trình không bằng 1 giờ fix bug của người khác."</em>
         </p>
       </section>
     </main>
   </div>
 
+  <!-- FOOTER -->
   <footer class="wrap site-footer">
-    <span>tonamson · vibe code</span>
+    <span>tonamson // vibe code notes // © 2026</span>
     <div class="footer-links">
-      <a href="./">Home</a>
+      <a href="#content">Top ↑</a>
+      <a href="./">Trang chủ</a>
       <a href="https://github.com/tonamson" target="_blank" rel="noopener noreferrer">github.com/tonamson</a>
     </div>
   </footer>
